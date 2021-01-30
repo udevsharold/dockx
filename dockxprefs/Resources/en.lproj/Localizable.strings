@@ -1,0 +1,324 @@
+//translated by udevs
+
+//=====================Short Text for Shortcuts=====================
+//5 letters word is optimal
+//6 letters is still acceptable, but not recommended
+"SHORT_SELECT_ALL" = "All";
+"SHORT_COPY" = "Copy";
+"SHORT_PASTE" = "Paste";
+"SHORT_CUT" = "Cut";
+"SHORT_UNDO" = "Undo";
+"SHORT_REDO" = "Redo";
+"SHORT_SELECT" = "Slct";
+"SHORT_BEGINNING" = "Bgn";
+"SHORT_ENDING" = "End";
+"SHORT_CAPITALIZE" = "Cap";
+"SHORT_LOWERCASE" = "low";
+"SHORT_UPPERCASE" = "UPP";
+"SHORT_DELETE" = "Del";
+"SHORT_BOLD" = "Bold";
+"SHORT_ITALIC" = "Itlic";
+"SHORT_UNDERLINE" = "Udln";
+"SHORT_DISMISS_KEYBOARD" = "Dmiss";
+"SHORT_MOVE_CURSOR_LEFT" = "Left";
+"SHORT_MOVE_CURSOR_RIGHT" = "Right";
+"SHORT_AUTO_CORRECTION" = "ACrrtn";
+"SHORT_AUTO_CAPITALIZATION" = "ACap";
+"SHORT_KEYBOARD_TYPE" = "Input";
+"SHORT_MOVE_CURSOR_UP" = "Up";
+"SHORT_MOVE_CURSOR_DOWN" = "Down";
+"SHORT_DEFINE" = "Dfne";
+"SHORT_RUN_COMMAND" = "Cmd";
+"SHORT_INSERT_TEXT" = "Insrt";
+"SHORT_MOVE_CURSOR_PREVIOUS_WORD" = "Prev";
+"SHORT_MOVE_CURSOR_NEXT_WORD" = "Next";
+"SHORT_MOVE_CURSOR_START_OF_LINE" = "LStrt";
+"SHORT_MOVE_CURSOR_END_OF_LINE" = "LEnd";
+"SHORT_MOVE_CURSOR_START_OF_PARAGRAPH" = "SPrgh";
+"SHORT_MOVE_CURSOR_END_OF_PARAGRAPH" = "EPrgh";
+"SHORT_MOVE_CURSOR_START_OF_SENTENCE" = "SStn";
+"SHORT_MOVE_CURSOR_END_OF_SENTENCE" = "EStn";
+"SHORT_SELECT_LINE" = "Line";
+"SHORT_SELECT_PARAGRAPH" = "Prgph";
+"SHORT_SELECT_SENTENCE" = "Stn";
+"SHORT_GLOBE" = "Globe";
+"SHORT_DICTATION" = "Dcttn";
+"SHORT_DELETE_FORWARD" = "DelFw";
+"SHORT_COPY_LOG" = "CLog";
+"SHORT_TRANSLOMATIC" = "Trsmtc";
+"SHORT_WASABI" = "Wsbi";
+"SHORT_PASITHEA" = "Psthea";
+"SHORT_SPONGEBOB" = "sPoNge";
+
+//=====================Long Text for Shortcuts=====================
+//Used for showing shortcuts name in "Manage Shortcuts" etc.
+"LONG_SELECT_ALL" = "Select All";
+"LONG_COPY" = "Copy";
+"LONG_PASTE" = "Paste";
+"LONG_CUT" = "Cut";
+"LONG_UNDO" = "Undo";
+"LONG_REDO" = "Redo";
+"LONG_SELECT" = "Select";
+"LONG_BEGINNING" = "Beginning of Document";
+"LONG_ENDING" = "Ending of Document";
+"LONG_CAPITALIZE" = "Capitalize Last Word";
+"LONG_LOWERCASE" = "lowercase";
+"LONG_UPPERCASE" = "UPPERCASE";
+"LONG_DELETE" = "Delete";
+"LONG_BOLD" = "Bold";
+"LONG_ITALIC" = "Italic";
+"LONG_UNDERLINE" = "Underline";
+"LONG_DISMISS_KEYBOARD" = "Dismiss Keyboard";
+"LONG_MOVE_CURSOR_LEFT" = "Cursor Left";
+"LONG_MOVE_CURSOR_RIGHT" = "Cursor Right";
+"LONG_AUTO_CORRECTION" = "Auto-Correction";
+"LONG_AUTO_CAPITALIZATION" = "Auto-Capitalization";
+"LONG_KEYBOARD_TYPE" = "Keyboard Input";
+"LONG_MOVE_CURSOR_UP" = "Cursor Up";
+"LONG_MOVE_CURSOR_DOWN" = "Cursor Down";
+"LONG_DEFINE" = "Define Word";
+"LONG_RUN_COMMAND" = "Shell Command";
+"LONG_INSERT_TEXT" = "Insert Text";
+"LONG_MOVE_CURSOR_PREVIOUS_WORD" = "Previous Word";
+"LONG_MOVE_CURSOR_NEXT_WORD" = "Next Word";
+"LONG_MOVE_CURSOR_START_OF_LINE" = "Line Start";
+"LONG_MOVE_CURSOR_END_OF_LINE" = "Line End";
+"LONG_MOVE_CURSOR_START_OF_PARAGRAPH" = "Start of Paragraph";
+"LONG_MOVE_CURSOR_END_OF_PARAGRAPH" = "End of Paragraph";
+"LONG_MOVE_CURSOR_START_OF_SENTENCE" = "Start of Sentence";
+"LONG_MOVE_CURSOR_END_OF_SENTENCE" = "End of Sentence";
+"LONG_SELECT_LINE" = "Select Line";
+"LONG_SELECT_PARAGRAPH" = "Select Paragraph";
+"LONG_SELECT_SENTENCE" = "Select Sentence";
+"LONG_GLOBE" = "Globe";
+"LONG_DICTATION" = "Dictation";
+"LONG_DELETE_FORWARD" = "Delete Forward";
+"LONG_COPY_LOG" = "CopyLog";
+"LONG_TRANSLOMATIC" = "Translomatic";
+"LONG_WASABI" = "Wasabi";
+"LONG_PASITHEA" = "Pasithea";
+"LONG_SPONGEBOB" = "sPonGeBob teXt";
+
+//=====================Toast=====================
+"TOAST_SELECT_ALL" = "Select All";
+"TOAST_COPY" = "Copy";
+"TOAST_PASTE" = "Paste";
+"TOAST_CUT" = "Cut";
+"TOAST_UNDO" = "Undo";
+"TOAST_REDO" = "Redo";
+"TOAST_SELECT" = "Select";
+"TOAST_BEGINNING" = "Beginning";
+"TOAST_ENDING" = "Ending";
+"TOAST_CAPITALIZE" = "Capitalize";
+"TOAST_LOWERCASE" = "lowercase";
+"TOAST_UPPERCASE" = "UPPERCASE";
+"TOAST_DELETE" = "Delete";
+"TOAST_BOLD" = "Bold";
+"TOAST_ITALIC" = "Italic";
+"TOAST_UNDERLINE" = "Underline";
+"TOAST_DISMISS_KEYBOARD" = "Dismiss";
+"TOAST_MOVE_CURSOR_LEFT" = "Left";
+"TOAST_MOVE_CURSOR_RIGHT" = "Right";
+"TOAST_AUTO_CORRECTION" = "Auto-Correction";
+"TOAST_AUTO_CAPITALIZATION" = "Auto-Capitalization";
+"TOAST_KEYBOARD_TYPE" = "Keyboard Input";
+"TOAST_MOVE_CURSOR_UP" = "Up";
+"TOAST_MOVE_CURSOR_DOWN" = "Down";
+"TOAST_DEFINE" = "Define";
+"TOAST_RUN_COMMAND" = "Command";
+"TOAST_INSERT_TEXT" = "Insert";
+"TOAST_MOVE_CURSOR_PREVIOUS_WORD" = "Previous";
+"TOAST_MOVE_CURSOR_NEXT_WORD" = "Next";
+"TOAST_MOVE_CURSOR_START_OF_LINE" = "Start of Line";
+"TOAST_MOVE_CURSOR_END_OF_LINE" = "End of Line";
+"TOAST_MOVE_CURSOR_START_OF_PARAGRAPH" = "Start of Paragraph";
+"TOAST_MOVE_CURSOR_END_OF_PARAGRAPH" = "End of Paragraph";
+"TOAST_MOVE_CURSOR_START_OF_SENTENCE" = "Start of Sentence";
+"TOAST_MOVE_CURSOR_END_OF_SENTENCE" = "End of Sentence";
+"TOAST_SELECT_LINE" = "Select Line";
+"TOAST_SELECT_PARAGRAPH" = "Select Paragraph";
+"TOAST_SELECT_SENTENCE" = "Select Sentence";
+"TOAST_GLOBE" = "Globe";
+"TOAST_DICTATION" = "Dictation";
+"TOAST_DELETE_FORWARD" = "Delete";
+"TOAST_COPY_LOG" = "CopyLog";
+"TOAST_TRANSLOMATIC" = "Translomatic";
+"TOAST_WASABI" = "Wasabi";
+"TOAST_PASITHEA" = "Pasithea";
+"TOAST_SPONGEBOB" = "sPoNge";
+"TOAST_ON" = "On";
+"TOAST_OFF" = "Off";
+"TOAST_KEYBOARD_TYPE_GENERIC" = "Generic";
+"TOAST_KEYBOARD_TYPE_DEFAULT" = "Default";
+"TOAST_KEYBOARD_TYPE_ORIGINAL" = "Original";
+"TOAST_KEYBOARD_TYPE_DECIMAL_PAD" = "Decimal Pad";
+"TOAST_KEYBOARD_TYPE_NUMBER_PAD" = "Number Pad";
+"TOAST_KEYBOARD_TYPE_URL" = "URL";
+"TOAST_KEYBOARD_TYPE_EMAIL" = "eMail";
+"TOAST_KEYBOARD_TYPE_ASCII" = "ASCII";
+"TOAST_KEYBOARD_TYPE_NUMBERS_AND_PUNC" = "Num & Punct.";
+"TOAST_KEYBOARD_TYPE_PHONE_PAD" = "Phone Pad";
+"TOAST_KEYBOARD_TYPE_NAME_AND_PHONE_PAD" = "Name & Phone";
+"TOAST_KEYBOARD_TYPE_TWITTER" = "Twitter";
+"TOAST_KEYBOARD_TYPE_WEB_SEARCH" = "Web Search";
+"TOAST_KEYBOARD_TYPE_NUMBER_PAD_ASCII" = "Number Pad";
+"TOAST_KEYBOARD_TYPE_ALPHABET" = "Alphabet";
+
+//=====================Manage Shortcuts=====================
+//Extras
+"EXTRAS_KEYBOARD_INPUT_BEHAVIOUR" = "Keyboard Input Behaviour";
+"EXTRAS_SHELL_COMMANDS" = "Shell Commands";
+"EXTRAS_INSERT_TEXT_CONTENT" = "Insert Text Content";
+"EXTRAS_PREVIOUS_WORD_BEHAVIOUR" = "Previous Word Behaviour";
+"EXTRAS_NEXT_WORD_BEHAVIOUR" = "Next Word Behaviour";
+"EXTRAS_LINE_START_BEHAVIOUR" = "Line Start Behaviour";
+"EXTRAS_LINE_END_BEHAVIOUR" = "Line End Behaviour";
+"EXTRAS_START_OF_PARAGRAPH_BEHAVIOUR" = "Start of Paragraph Behaviour";
+"EXTRAS_END_OF_PARAGRAPH_BEHAVIOUR" = "End of Paragraph Behaviour";
+"EXTRAS_START_OF_SENTENCE_BEHAVIOUR" = "Start of Sentence Behaviour";
+"EXTRAS_END_OF_SENTENCE_BEHAVIOUR" = "End of Sentence Behaviour";
+"EXTRAS_DELETE_BEHAVIOUR" = "Delete Behaviour";
+"EXTRAS_DELETE_FORWARD_BEHAVIOUR" = "Delete Forward Behaviour";
+"EXTRAS_GLOBE_BEHAVIOUR" = "Globe Behaviour";
+"EXTRAS_PASTE_BEHAVIOUR" = "Paste Behaviour";
+
+//Title
+"ENABLED_SHORTCUTS" = "Enabled Shorcuts";
+"DISABLED_SHORTCUTS" = "Disabled Shorcuts";
+"EXTRAS" = "Extras";
+"SHORTCUTS" = "Shortcuts";
+
+//Error
+"INCOMPATIBLE_RESET" = "Incompatible, please reset";
+
+//Reset
+"RESET" = "Reset";
+"RESET_MESSAGE" = "Reset all shortcuts included customized long press, double tap and shooting star actions to default?";
+"RESET_YES" = "Yes";
+"RESET_NO" = "No";
+
+//Footer
+"FOOTER_TEXT_FOR_ENABLED_SHORTCUTS" = "Add as many shortcuts as you wish! Tap any shortcut to customize its gesture actions.
+
+NOTE: If you experiencing any issue or shortcuts not showing correctly, please reset.";
+
+"FOOTER_TEXT_FOR_EXTRAS" = "Tap item to customize.";
+
+"FOOTER_TEXT_FOR_DEFAULT_LONG_PRESS_GESTURES" = "Default long press gesture for:
+Select - select all words
+Select All - select last word
+Copy - select all and copy
+Paste - select all and paste
+Cut - delete last word
+Undo - go to beginning of document
+Redo - go to ending of document
+Beginning of Document - undo
+Ending of Document - redo
+Capitalize Last Word - uppercase last word
+lowercase - uppercase last word
+UPPERCASE - lowercase last word
+Delete - select all and delete
+Delete Forward - select all and delete
+Bold - select last word and toggle bold face
+Italic - select last word and toggle italic
+Underline - select last word and toggle underline
+Cursor Left - move cursor backward exponentionally
+Cursor Right - move cursor forward exponentionally
+Cursor Up - move cursor upward exponentionally
+Cursor Down - move cursor downward exponentionally
+Keyboard Input - revert back to original input type
+Previous & Next Word - select word
+Line Start & End - select line
+Start & End of Paragraph - select paragraph
+Start & End of Sentence  - select sentence
+Globe - activate dictation
+sPonGeBob teXt - select all and sPonGeBob";
+
+"FOOTER_TEXT_FOR_DEFAULT_LONG_PRESS_GESTURES_TRANSLOMATIC" = "Translomatic - select paragraph and translate";
+
+//=====================CUSTOM ACTIONS PAGE=====================
+"FIRST_ACTION" = "First Action";
+"SECOND_ACTION" = "Second Action";
+"FOOTER_FIRST_ACTION" = "This action will be performed prior to the second action below. It can be none. Leave all blank for default actions.";
+
+//=====================ADVANCED SETTINGS PAGE=====================
+//Shortcuts
+"FOOTER_SPACING" = "Spacing between shortcuts";
+"FOOTER_HEIGHT" = "Height";
+"FOOTER_RADIUS" = "Radius";
+//Offsets
+"OFFSETS" = "Offsets";
+"FOOTER_OFFSETS_LEADING" = "Leading (Left)";
+"FOOTER_OFFSETS_TRAILING" = "Trailing (Right)";
+"FOOTER_OFFSETS_BOTTOM" = "Bottom (Vertical)";
+"FOOTER_OFFSETS_NOTICE" = "NOTE: Customized offsets might not work properly in one-handed keyboard mode.";
+//Insets
+"INSETS" = "Insets";
+"FOOTER_INSETS_TOP" = "Top";
+"FOOTER_INSETS_BOTTOM" = "Bottom";
+"FOOTER_INSETS_LEFT" = "Left";
+"FOOTER_INSETS_RIGHT" = "Right";
+
+//=====================KEYBOARD INPUT BEHAVIOR=====================
+"DISABLED_INPUT_TYPE" = "Disabled Input Type";
+"ENABLED_INPUT_TYPE" = "Enabled Input Type";
+"FOOTER_ENABLED" = "Enabled input will be cycled when shorcut is tapped. \"Default\" type will be skipped if it is same as \"Original\". Set a minimum of 2 items, including Original.\n\nNOTE: Some input doesn't support changing input type, DockX indicates it by changing the current icon to hollow/grey/strikethrough.";
+"RESET_TO_DEFAULT_MESSAGE" = "Reset to default?";
+"KEYBOARD_INPUT_TYPE_TITLE" = "Keyboard Input";
+
+//=====================CURSOR BEHAVIOR=====================
+"CURSOR_BEHAVIOR_WHOLE_PARA" = "Whole Paragraph";
+"CURSOR_BEHAVIOR_FROM_CURRENT_POS" = "From Current Position";
+"CURSOR_BEHAVIOR_WHOLE_LINE" = "Whole Line";
+"CURSOR_BEHAVIOR_WHOLE_SENTENCE" = "Whole Sentence";
+"CURSOR_BEHAVIOR_SINGLE_WORD" = "Single Word Only";
+"CURSOR_BEHAVIOR_CONTINUOUSLY" = "Continuously";
+"CURSOR_BEHAVIOR_NODE_TITLE" = "Default Long Press Behaviour";
+"FOOTER_CURSOR_BEHAVIOR" = "Choose the selection behaviour for default long press gesture.";
+
+//=====================GESTURES PAGE=====================
+"GESTURES" = "Gestures";
+"LONG_PRESS" = "Long Press";
+"DOUBLE_TAP" = "Double Tap";
+"SHOOTING_STAR" = "Shooting Star";
+"FOOTER_SHOOTING_STAR" = "\"Shooting Star\" is a swiping down gesture from the keyboard towards any shortcut.";
+
+//=====================INSERT TEXT BEHAVIOR=====================
+"SINGLE_TAP" = "Single Tap";
+"FOOTER_SINGLE_TAP" = "Set the text to be inserted when shortcut tapped.";
+"FOOTER_LONG_PRESS" = "Set the text to be inserted when shortcut is long pressed.\n\nNOTE: When custom long press gesture is set in previous section, this will be ignored.";
+"TEXT" = "Text";
+"ABBREV_SHORT_DATE" = "S. Date";
+"ABBREV_MEDIUM_DATE" = "M. Date";
+"ABBREV_SHORT_TIME" = "S. Time";
+"ABBREV_MEDIUM_TIME" = "M. Time";
+"ABBREV_FULL_DATE" = "F. Date";
+
+//=====================SHELL COMMAND BEHAVIOR=====================
+"SHELL_TITLE" = "Title";
+"SHELL_COMMAND" = "Command";
+"FOOTER_SHELL_SINGLE_TAP" = "Set the shell command to be executed when shortcut tapped.";
+"FOOTER_SHELL_LONG_PRESS" = "Set the shell command to be executed when shortcut long pressed.\n\nNOTE: When custom long press gesture is set in previous section, this will be ignored.";
+
+//=====================DELETE BEHAVIOR=====================
+"SMART_DELETE" = "Smart Delete";
+"FOOTER_DELETE" = "Smart delete will insert a space after deletion.\n\nNOTE: If no word is selected, closest word/punctuation will be selected for delete.";
+
+//=====================GLOBE BEHAVIOR=====================
+"EMOJI_KEYBOARD" = "Emoji Keyboard";
+"SKIP_EMOJI" = "Skip Emoji";
+
+//=====================PASTE BEHAVIOR=====================
+"SAFARI" = "Safari";
+"FOOTER_SAFARI" = "Select content type to be pasted as \"Paste and Go\" in Safari's navigation bar.";
+"PASTE_AND_GO_DISABLED" = "Disabled";
+"PASTE_AND_GO_URL_ONLY" = "URL Only";
+"PASTE_AND_GO_EVERYTHING" = "Everything";
+
+//=====================MISC=====================
+"SEARCHBAR_PLACEHOLDER" = "How Does It Looks?";
+"RESPRING" = "Respring";
+"RESPRING_MESSAGE" = "Respring is not necessary, but recommended for changes to take effect instantly. Respring now?";
+"DEFAULT" = "Default";
+"ANSWER_YES" = "Yes";
+"ANSWER_NO" = "No";
