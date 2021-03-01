@@ -472,7 +472,7 @@
 		</dict>
 		<dict>
 			<key>cellClass</key>
-			<string>HBColorPickerTableCell</string>
+			<string>SparkColourPickerCell</string>
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>label</key>
@@ -483,12 +483,19 @@
 			<string>shortcutstintpicker</string>
 			<key>PostNotification</key>
 			<string>com.udevs.dockx/prefschanged</string>
-			<key>default</key>
-			<string>#ff0000</string>
-			<key>defaults</key>
-			<string>com.udevs.dockx</string>
-			<key>showAlphaSlider</key>
-			<true/>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>PreviewGradient</key>
+				<false/>
+				<key>PreviewStyle</key>
+				<integer>3</integer>
+				<key>defaults</key>
+				<string>com.udevs.dockx</string>
+				<key>alpha</key>
+				<true/>
+				<key>fallback</key>
+				<string>#ff0000</string>
+			</dict>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -518,7 +525,7 @@
 		</dict>
 		<dict>
 			<key>cellClass</key>
-			<string>HBColorPickerTableCell</string>
+			<string>SparkColourPickerCell</string>
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>label</key>
@@ -529,12 +536,19 @@
 			<string>shortcutsbackgroundtintpicker</string>
 			<key>PostNotification</key>
 			<string>com.udevs.dockx/prefschanged</string>
-			<key>default</key>
-			<string>#5B5B5B</string>
-			<key>defaults</key>
-			<string>com.udevs.dockx</string>
-			<key>showAlphaSlider</key>
-			<true/>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>PreviewGradient</key>
+				<false/>
+				<key>PreviewStyle</key>
+				<integer>3</integer>
+				<key>defaults</key>
+				<string>com.udevs.dockx</string>
+				<key>alpha</key>
+				<true/>
+				<key>fallback</key>
+				<string>#5B5B5B</string>
+			</dict>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -564,7 +578,7 @@
 		</dict>
 		<dict>
 			<key>cellClass</key>
-			<string>HBColorPickerTableCell</string>
+			<string>SparkColourPickerCell</string>
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>label</key>
@@ -575,12 +589,19 @@
 			<string>toasttintpicker</string>
 			<key>PostNotification</key>
 			<string>com.udevs.dockx/prefschanged</string>
-			<key>default</key>
-			<string>#ff0000</string>
-			<key>defaults</key>
-			<string>com.udevs.dockx</string>
-			<key>showAlphaSlider</key>
-			<true/>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>PreviewGradient</key>
+				<false/>
+				<key>PreviewStyle</key>
+				<integer>3</integer>
+				<key>defaults</key>
+				<string>com.udevs.dockx</string>
+				<key>alpha</key>
+				<true/>
+				<key>fallback</key>
+				<string>#ff0000</string>
+			</dict>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -610,11 +631,9 @@
 		</dict>
 		<dict>
 			<key>cellClass</key>
-			<string>HBColorPickerTableCell</string>
+			<string>SparkColourPickerCell</string>
 			<key>cell</key>
 			<string>PSLinkCell</string>
-			<key>showAlphaSlider</key>
-			<true/>
 			<key>label</key>
 			<string>TOAST_BACKGROUND_TINT</string>
 			<key>key</key>
@@ -623,10 +642,19 @@
 			<string>toastbackgroundtintpicker</string>
 			<key>PostNotification</key>
 			<string>com.udevs.dockx/prefschanged</string>
-			<key>default</key>
-			<string>#000000</string>
-			<key>defaults</key>
-			<string>com.udevs.dockx</string>
+			<key>libsparkcolourpicker</key>
+			<dict>
+				<key>PreviewGradient</key>
+				<false/>
+				<key>PreviewStyle</key>
+				<integer>3</integer>
+				<key>defaults</key>
+				<string>com.udevs.dockx</string>
+				<key>alpha</key>
+				<true/>
+				<key>fallback</key>
+				<string>#000000</string>
+			</dict>
 		</dict>
 		<dict>
 			<key>cell</key>

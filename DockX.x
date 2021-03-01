@@ -1,7 +1,7 @@
 #include "common.h"
 #include "DockX.h"
 #import "ToastWindowController.h"
-#import <libcolorpicker.h>
+#import <SparkColourPicker/SparkColourPickerUtils.h>
 #include "NSTask.h"
 #include "LoremIpsum.h"
 #include "DockXHelper.h"
@@ -4968,11 +4968,13 @@ static void reloadPrefs() {
     currentBackgroundTintColor = nil;
     //currentTintColor = nil;
     if (preferencesBool(kColorEnabledkey,NO)){
-        if (preferencesBool(kShortcutsTintEnabled,YES)) currentTintColor = LCPParseColorString(prefs[@"shortcutstint"], @"#ff0000");
-        if (preferencesBool(kToastTintEnabled,YES)) toastTintColor = LCPParseColorString(prefs[@"toasttint"], @"#ff0000");
-        if (preferencesBool(kToastBackgroundTintEnabled,YES)) toastBackgroundTintColor = LCPParseColorString(prefs[@"toastbackgroundtint"], @"#000000");
-        if (preferencesBool(kShortcutsBackgroundTintEnabled,YES)) currentBackgroundTintColor = LCPParseColorString(prefs[@"shortcutsbackgroundtint"], @"#5B5B5B");
+        
+        if (preferencesBool(kShortcutsTintEnabled,YES)) currentTintColor = [SparkColourPickerUtils colourWithString:prefs[@"shortcutstint"]  withFallback:@"#ff0000"];
+        if (preferencesBool(kToastTintEnabled,YES)) toastTintColor = [SparkColourPickerUtils colourWithString:prefs[@"toasttint"]  withFallback:@"#ff0000"];
+        if (preferencesBool(kToastBackgroundTintEnabled,YES)) toastBackgroundTintColor = [SparkColourPickerUtils colourWithString:prefs[@"toastbackgroundtint"]  withFallback:@"#000000"];
+        if (preferencesBool(kToastBackgroundTintEnabled,YES)) toastBackgroundTintColor = [SparkColourPickerUtils colourWithString:prefs[@"shortcutsbackgroundtint"]  withFallback:@"#5B5B5B"];
     }
+    
     toggledOn = preferencesBool(kToggledOnkey,YES);
     singleTapGlobeEnabled = (((preferencesInt(kDockModekey, 0) == 0 || preferencesInt(kDockModekey, 0) == 2)) && (preferencesInt(kDedicatedGestureButtonkey,0) == 1 || preferencesInt(kDedicatedGestureButtonkey,0) == 3) && (preferencesInt(kGestureTypekey,0) == 0)) ? YES : NO;
     singleTapDictationEnabled = (((preferencesInt(kDockModekey, 0) == 0 || preferencesInt(kDockModekey, 0) == 1)) && (preferencesInt(kDedicatedGestureButtonkey,0) == 2 || preferencesInt(kDedicatedGestureButtonkey,0) == 3) && (preferencesInt(kGestureTypekey,0) == 0)) ? YES : NO;

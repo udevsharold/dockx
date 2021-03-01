@@ -1,7 +1,7 @@
 Package: com.udevs.dockx
 Name: DockX
-Depends: mobilesubstrate, com.rpetrich.rocketbootstrap (>= 1.0.2), firmware(>=12.0), ws.hbang.alderis
-Version: 2.2.7
+Depends: mobilesubstrate, preferenceloader, com.rpetrich.rocketbootstrap (>= 1.0.2), firmware(>=12.0), com.spark.libsparkcolourpicker
+Version: 2.2.8
 Architecture: iphoneos-arm
 Description: Pasteboard shortcuts on your keyboard dock!
 Maintainer: udevs

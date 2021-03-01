@@ -9,7 +9,7 @@ DockXPrefs_INSTALL_PATH = /Library/PreferenceBundles
 DockXPrefs_FRAMEWORKS = UIKit
 DockXPrefs_PRIVATE_FRAMEWORKS = Preferences AppSupport
 DockXPrefs_CFLAGS = -fobjc-arc
-DockXPrefs_LIBRARIES = rocketbootstrap colorpicker
+DockXPrefs_LIBRARIES = rocketbootstrap sparkcolourpicker
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 
