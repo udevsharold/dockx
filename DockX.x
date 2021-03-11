@@ -173,10 +173,10 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
 
 @implementation DockXCollectionView
 /*
-+(BOOL)supportsSecureCoding{
-    return YES;
-}
-
+ +(BOOL)supportsSecureCoding{
+ return YES;
+ }
+ 
  -(void)encodeWithCoder:(NSCoder *)encoder {
  
  //[encoder encodeObject:self forKey:@"self"];
@@ -318,7 +318,7 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
     
     if (self = [super initWithFrame:CGRectZero collectionViewLayout:flowLayout]) {
         self.shortcutsGenerator = [ShortcutsGenerator sharedInstance];
-
+        
         
         if (!prefs){
             //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -340,9 +340,9 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
             HBLogDebug(@"Utilized cache");
         }else{
             HBLogDebug(@"Update cache");
-
+            
             NSMutableDictionary *cache = [[NSMutableDictionary alloc] init];
-                        
+            
             self.keyboardTypeDataFull = [self.shortcutsGenerator keyboardTypeData];
             self.keyboardTypeLabelFull = [self.shortcutsGenerator keyboardTypeLabel];
             cache[@"keyboardTypeDataFull"] = self.keyboardTypeDataFull;
@@ -364,7 +364,7 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
             cache[@"translomaticDylibExist"] = @(self.shortcutsGenerator.translomaticDylibExist);
             cache[@"wasabiDylibExist"] = @(self.shortcutsGenerator.wasabiDylibExist);
             cache[@"pasitheaDylibExist"] = @(self.shortcutsGenerator.pasitheaDylibExist);
-
+            
             
             if (prefs[@"shortcuts"]){
                 
@@ -4248,33 +4248,51 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
     if (self.dockx.hidden){
         self.barmoji.hidden = YES;
         self.dockx.hidden = NO;
-        self.dockx.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001);
-        [UIView animateWithDuration:0.3/4 animations:^{
-            self.dockx.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
-        } completion:^(BOOL finished) {
+        
+        if (@available(iOS 14.0, *)){
+            self.dockx.alpha = 0.0f;
+            [UIView animateWithDuration:0.3f animations:^{
+                self.dockx.alpha = 1.0f;
+            } completion:^(BOOL finished) {
+            }];
+        }else{
+            self.dockx.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001);
             [UIView animateWithDuration:0.3/4 animations:^{
-                self.dockx.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
+                self.dockx.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.3/4 animations:^{
-                    self.dockx.transform = CGAffineTransformIdentity;
+                    self.dockx.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.3/4 animations:^{
+                        self.dockx.transform = CGAffineTransformIdentity;
+                    }];
                 }];
             }];
-        }];
+        }
     }else{
         self.dockx.hidden = YES;
         self.barmoji.hidden = NO;
-        self.barmoji.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001);
-        [UIView animateWithDuration:0.3/4 animations:^{
-            self.barmoji.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
-        } completion:^(BOOL finished) {
+        
+        if (@available(iOS 14.0, *)){
+            self.barmoji.alpha = 0.0f;
+            [UIView animateWithDuration:0.3f animations:^{
+                self.barmoji.alpha = 1.0f;
+            } completion:^(BOOL finished) {
+            }];
+        }else{
+            self.barmoji.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001);
             [UIView animateWithDuration:0.3/4 animations:^{
-                self.barmoji.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
+                self.barmoji.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.3/4 animations:^{
-                    self.barmoji.transform = CGAffineTransformIdentity;
+                    self.barmoji.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.3/4 animations:^{
+                        self.barmoji.transform = CGAffineTransformIdentity;
+                    }];
                 }];
             }];
-        }];
+        }
     }
     [self layoutSubviews];
     
@@ -4921,20 +4939,20 @@ static void updateAutoCapitalization() {
 
 static void reloadPrefs() {
     prefs = [[[PrefsManager sharedInstance] readPrefsFromSandbox:!isSpringBoard] mutableCopy];
-
+    
     if (!firstInit){
         [[PrefsManager sharedInstance] removeKey:kCachekey fromSandbox:!isSpringBoard];
     }else{
         if (isSpringBoard){
-           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-               ShortcutsGenerator *shortcutsGenerator = [ShortcutsGenerator sharedInstance];
-               HBLogDebug(@"cache: %d ** actual: %d", ([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue]), ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue]));
-               if (prefs[kCachekey] && (([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue]) != ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue]))){
-                   [[PrefsManager sharedInstance] removeKey:kCachekey fromSandbox:!isSpringBoard];
-                   HBLogDebug(@"cache deleted");
-               }
-           });
-           }
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                ShortcutsGenerator *shortcutsGenerator = [ShortcutsGenerator sharedInstance];
+                HBLogDebug(@"cache: %d ** actual: %d", ([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue]), ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue]));
+                if (prefs[kCachekey] && (([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue]) != ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue]))){
+                    [[PrefsManager sharedInstance] removeKey:kCachekey fromSandbox:!isSpringBoard];
+                    HBLogDebug(@"cache deleted");
+                }
+            });
+        }
         firstInit = NO;
     }
     toastTintColor = toastImageTintColor;
@@ -5019,7 +5037,7 @@ static void reloadPrefs() {
      });
      }
      */
-   
+    
     
 }
 
