@@ -2,6 +2,16 @@
 #include "DockXCollectionView.h"
 #include "TextOperation.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void showCopypastaWithNotification() __attribute__((weak));
+
+#ifdef __cplusplus
+}
+#endif
+
 @interface UIKeyboardImpl : UIView
 + (UIKeyboardImpl*)activeInstance;
 +(BOOL)isFloating;

@@ -15,6 +15,7 @@ ADockX_FILES = $(wildcard *.x) $(wildcard *.m) $(wildcard *.xm)
 ADockX_CFLAGS = -fobjc-arc
 ADockX_LIBRARIES = rocketbootstrap sparkcolourpicker
 ADockX_PRIVATE_FRAMEWORKS = AppSupport Preferences
+ADockX_LDFLAGS = -Wl,-U,_showCopypastaWithNotification
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += dockxprefs

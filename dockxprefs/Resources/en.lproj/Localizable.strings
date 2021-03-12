@@ -49,6 +49,7 @@
 "SHORT_WASABI" = "Wsbi";
 "SHORT_PASITHEA" = "Psthea";
 "SHORT_SPONGEBOB" = "sPoNge";
+"SHORT_COPYPASTA" = "Cpasta";
 
 //=====================Long Text for Shortcuts=====================
 //Used for showing shortcuts name in "Manage Shortcuts" etc.
@@ -98,6 +99,7 @@
 "LONG_WASABI" = "Wasabi";
 "LONG_PASITHEA" = "Pasithea";
 "LONG_SPONGEBOB" = "sPonGeBob teXt";
+"LONG_COPYPASTA" = "Copypasta";
 
 //=====================Toast=====================
 "TOAST_SELECT_ALL" = "Select All";
@@ -146,6 +148,7 @@
 "TOAST_WASABI" = "Wasabi";
 "TOAST_PASITHEA" = "Pasithea";
 "TOAST_SPONGEBOB" = "sPoNge";
+"TOAST_COPYPASTA" = "Copypasta";
 "TOAST_ON" = "On";
 "TOAST_OFF" = "Off";
 "TOAST_KEYBOARD_TYPE_GENERIC" = "Generic";

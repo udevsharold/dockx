@@ -364,7 +364,8 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
             cache[@"translomaticDylibExist"] = @(self.shortcutsGenerator.translomaticDylibExist);
             cache[@"wasabiDylibExist"] = @(self.shortcutsGenerator.wasabiDylibExist);
             cache[@"pasitheaDylibExist"] = @(self.shortcutsGenerator.pasitheaDylibExist);
-            
+            cache[@"copypastaDylibExist"] = @(self.shortcutsGenerator.copypastaDylibExist);
+
             
             if (prefs[@"shortcuts"]){
                 
@@ -379,6 +380,9 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
                         continue;
                     }
                     if ([item[@"selector"] isEqualToString:@"pasitheaAction:"] && !self.shortcutsGenerator.pasitheaDylibExist){
+                        continue;
+                    }
+                    if ([item[@"selector"] isEqualToString:@"copypastaAction:"] && !self.shortcutsGenerator.copypastaDylibExist){
                         continue;
                     }
                     [currentOrder12 addObject:item[@"images12"]];
@@ -888,7 +892,7 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
         self.pagingEnabled = NO;
     }else if (isPagingEnabled && !self.pagingEnabled){
         if (!self.autoPaginationDispatchBlock){
-            self.autoPaginationDispatchBlock = dispatch_block_create(0, ^{
+            self.autoPaginationDispatchBlock = dispatch_block_create(static_cast<dispatch_block_flags_t>(0), ^{
                 self.pagingEnabled = YES;
                 self.autoPaginationDispatchBlock = nil;
             });
@@ -1155,7 +1159,13 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
 -(void)triggerImpactAndAnimationWithButton:(UIButton *)sender selectorName:(NSString *)selname toastWidthOffset:(int)woffset toastHeightOffset:(int)hoffset{
     //haptic, 0=none, 1=once, 2==success(twice)
     if ( preferencesBool(kEnabledHaptickey,YES) && self.hapticType != 0){
-        self.hapticType == 1 ? ([[[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight] impactOccurred]) : ([[[UINotificationFeedbackGenerator alloc] init] notificationOccurred:UINotificationFeedbackTypeSuccess], self.hapticType = 1);
+        
+        if (self.hapticType == 1){
+            [[[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight] impactOccurred];
+        }else{
+            [[[UINotificationFeedbackGenerator alloc] init] notificationOccurred:UINotificationFeedbackTypeSuccess];
+            self.hapticType = 1;
+        }
     }
     if ( preferencesBool(kToastkey,YES) ){
         int th = toastHeight;
@@ -2588,6 +2598,17 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
     [self autoPaginationControl];
 }
 
+-(void)copypastaAction:(UIButton*)sender{
+    [self autoPaginationControl];
+    if (!self.shortcutsGenerator.copypastaDylibExist){
+        [self autoPaginationControl];
+        return;
+    }
+    [self triggerImpactAndAnimationWithButton:sender selectorName:NSStringFromSelector(_cmd) toastWidthOffset:0 toastHeightOffset:0];
+    showCopypastaWithNotification();
+    [self autoPaginationControl];
+}
+
 -(void)globeAction:(UIButton*)sender{
     [self autoPaginationControl];
     [self triggerImpactAndAnimationWithButton:sender selectorName:NSStringFromSelector(_cmd) toastWidthOffset:0 toastHeightOffset:0];
@@ -2901,7 +2922,7 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
         
         if (!self.retestDispatchBlock){
             //HBLogDebug(@"cursorTimerRetest: %ld, dispatch: %@", recognizer.state, self.retestDispatchBlock);
-            self.retestDispatchBlock = dispatch_block_create(0, ^{
+            self.retestDispatchBlock = dispatch_block_create(static_cast<dispatch_block_flags_t>(0), ^{
                 if (recognizer.state == UIGestureRecognizerStatePossible || recognizer.state == UIGestureRecognizerStateEnded){
                     [self.cursorTimer invalidate];
                     self.cursorTimer = nil;
@@ -4947,7 +4968,7 @@ static void reloadPrefs() {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 ShortcutsGenerator *shortcutsGenerator = [ShortcutsGenerator sharedInstance];
                 HBLogDebug(@"cache: %d ** actual: %d", ([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue]), ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue]));
-                if (prefs[kCachekey] && (([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue]) != ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue]))){
+                if (prefs[kCachekey] && (([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue] + [prefs[kCachekey][@"copypastaDylibExist"] intValue]) != ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue] + [@(shortcutsGenerator.copypastaDylibExist) intValue]))){
                     [[PrefsManager sharedInstance] removeKey:kCachekey fromSandbox:!isSpringBoard];
                     HBLogDebug(@"cache deleted");
                 }

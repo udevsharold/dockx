@@ -1,11 +1,6 @@
 #include "common.h"
 #include "ShortcutsGenerator.h"
 
-#define copyLogDylib @"/Library/MobileSubstrate/DynamicLibraries/CopyLog.dylib"
-#define translomaticDylib @"/Library/MobileSubstrate/DynamicLibraries/Translomatic.dylib"
-#define wasabiDylib @"/Library/MobileSubstrate/DynamicLibraries/Wasabi.dylib"
-#define pasitheaDylib @"/Library/MobileSubstrate/DynamicLibraries/Pasithea2.dylib"
-
 static const NSBundle *tweakBundle;
 
 @implementation ShortcutsGenerator
@@ -49,6 +44,8 @@ static const NSBundle *tweakBundle;
         self.translomaticDylibExist = [self dylibExist:translomaticDylib manager:fileManager];
         self.wasabiDylibExist = [self dylibExist:wasabiDylib manager:fileManager];
         self.pasitheaDylibExist = [self dylibExist:pasitheaDylib manager:fileManager];
+        self.copypastaDylibExist = [self dylibExist:copypastaDylib manager:fileManager];
+        HBLogDebug(@"copypastaDylibExist: %d", self.copypastaDylibExist?1:0);
     }
     return self;
 }
@@ -81,7 +78,7 @@ static const NSBundle *tweakBundle;
 }
 
 -(NSArray *)labelName{
-    NSArray *array = @[LOCALIZED(@"LONG_SELECT_ALL"), LOCALIZED(@"LONG_COPY"), LOCALIZED(@"LONG_PASTE"), LOCALIZED(@"LONG_CUT"), LOCALIZED(@"LONG_UNDO"), LOCALIZED(@"LONG_REDO"), LOCALIZED(@"LONG_SELECT"), LOCALIZED(@"LONG_BEGINNING"), LOCALIZED(@"LONG_ENDING"), LOCALIZED(@"LONG_CAPITALIZE"), LOCALIZED(@"LONG_LOWERCASE"), LOCALIZED(@"LONG_UPPERCASE"), LOCALIZED(@"LONG_DELETE"), LOCALIZED(@"LONG_BOLD"), LOCALIZED(@"LONG_ITALIC"), LOCALIZED(@"LONG_UNDERLINE"), LOCALIZED(@"LONG_DISMISS_KEYBOARD"), LOCALIZED(@"LONG_MOVE_CURSOR_LEFT"), LOCALIZED(@"LONG_MOVE_CURSOR_RIGHT"), LOCALIZED(@"LONG_AUTO_CORRECTION"), LOCALIZED(@"LONG_AUTO_CAPITALIZATION"), LOCALIZED(@"LONG_KEYBOARD_TYPE"), LOCALIZED(@"LONG_MOVE_CURSOR_UP"), LOCALIZED(@"LONG_MOVE_CURSOR_DOWN"), LOCALIZED(@"LONG_DEFINE"), LOCALIZED(@"LONG_RUN_COMMAND"), LOCALIZED(@"LONG_INSERT_TEXT"), LOCALIZED(@"LONG_MOVE_CURSOR_PREVIOUS_WORD"), LOCALIZED(@"LONG_MOVE_CURSOR_NEXT_WORD"), LOCALIZED(@"LONG_MOVE_CURSOR_START_OF_LINE"), LOCALIZED(@"LONG_MOVE_CURSOR_END_OF_LINE"), LOCALIZED(@"LONG_MOVE_CURSOR_START_OF_PARAGRAPH"), LOCALIZED(@"LONG_MOVE_CURSOR_END_OF_PARAGRAPH"), LOCALIZED(@"LONG_MOVE_CURSOR_START_OF_SENTENCE"), LOCALIZED(@"LONG_MOVE_CURSOR_END_OF_SENTENCE"), LOCALIZED(@"LONG_MOVE_CURSOR_SELECT_LINE"), LOCALIZED(@"LONG_SELECT_PARAGRAPH"), LOCALIZED(@"LONG_SELECT_SENTENCE"), LOCALIZED(@"LONG_GLOBE"), LOCALIZED(@"LONG_DICTATION"), LOCALIZED(@"LONG_DELETE_FORWARD"), LOCALIZED(@"LONG_SPONGEBOB")];
+    NSArray *array = @[LOCALIZED(@"LONG_SELECT_ALL"), LOCALIZED(@"LONG_COPY"), LOCALIZED(@"LONG_PASTE"), LOCALIZED(@"LONG_CUT"), LOCALIZED(@"LONG_UNDO"), LOCALIZED(@"LONG_REDO"), LOCALIZED(@"LONG_SELECT"), LOCALIZED(@"LONG_BEGINNING"), LOCALIZED(@"LONG_ENDING"), LOCALIZED(@"LONG_CAPITALIZE"), LOCALIZED(@"LONG_LOWERCASE"), LOCALIZED(@"LONG_UPPERCASE"), LOCALIZED(@"LONG_DELETE"), LOCALIZED(@"LONG_BOLD"), LOCALIZED(@"LONG_ITALIC"), LOCALIZED(@"LONG_UNDERLINE"), LOCALIZED(@"LONG_DISMISS_KEYBOARD"), LOCALIZED(@"LONG_MOVE_CURSOR_LEFT"), LOCALIZED(@"LONG_MOVE_CURSOR_RIGHT"), LOCALIZED(@"LONG_AUTO_CORRECTION"), LOCALIZED(@"LONG_AUTO_CAPITALIZATION"), LOCALIZED(@"LONG_KEYBOARD_TYPE"), LOCALIZED(@"LONG_MOVE_CURSOR_UP"), LOCALIZED(@"LONG_MOVE_CURSOR_DOWN"), LOCALIZED(@"LONG_DEFINE"), LOCALIZED(@"LONG_RUN_COMMAND"), LOCALIZED(@"LONG_INSERT_TEXT"), LOCALIZED(@"LONG_MOVE_CURSOR_PREVIOUS_WORD"), LOCALIZED(@"LONG_MOVE_CURSOR_NEXT_WORD"), LOCALIZED(@"LONG_MOVE_CURSOR_START_OF_LINE"), LOCALIZED(@"LONG_MOVE_CURSOR_END_OF_LINE"), LOCALIZED(@"LONG_MOVE_CURSOR_START_OF_PARAGRAPH"), LOCALIZED(@"LONG_MOVE_CURSOR_END_OF_PARAGRAPH"), LOCALIZED(@"LONG_MOVE_CURSOR_START_OF_SENTENCE"), LOCALIZED(@"LONG_MOVE_CURSOR_END_OF_SENTENCE"), LOCALIZED(@"LONG_SELECT_LINE"), LOCALIZED(@"LONG_SELECT_PARAGRAPH"),LOCALIZED(@"LONG_SELECT_SENTENCE"), LOCALIZED(@"LONG_GLOBE"), LOCALIZED(@"LONG_DICTATION"), LOCALIZED(@"LONG_DELETE_FORWARD"), LOCALIZED(@"LONG_SPONGEBOB")];
     array = [self thirdPartyLabelNameArray:array];
     return array;
 }
@@ -112,6 +109,13 @@ static const NSBundle *tweakBundle;
         }
     }
     if (self.pasitheaDylibExist){
+        if (iosVersion == 0){
+            [thirdPartArray addObject:@"UIButtonBarCompose"];
+        }else{
+            [thirdPartArray addObject:@"rectangle.and.paperclip"];
+        }
+    }
+    if (self.copypastaDylibExist){
         if (iosVersion == 0){
             [thirdPartArray addObject:@"UIButtonBarCompose"];
         }else{
@@ -151,6 +155,13 @@ static const NSBundle *tweakBundle;
             [thirdPartArray addObject:@"pasitheaAction:"];
         }
     }
+    if (self.copypastaDylibExist){
+        if (longPress){
+            [thirdPartArray addObject:@"copypastaActionLP:"];
+        }else{
+            [thirdPartArray addObject:@"copypastaAction:"];
+        }
+    }
     return thirdPartArray;
 }
 
@@ -168,6 +179,9 @@ static const NSBundle *tweakBundle;
     if (self.pasitheaDylibExist){
         [thirdPartArray addObject:LOCALIZED(@"LONG_PASITHEA")];
     }
+    if (self.copypastaDylibExist){
+        [thirdPartArray addObject:LOCALIZED(@"LONG_COPYPASTA")];
+    }
     return thirdPartArray;
 }
 
@@ -184,6 +198,9 @@ static const NSBundle *tweakBundle;
     }
     if (self.pasitheaDylibExist){
         [thirdPartArray addObject:LOCALIZED(@"SHORT_PASITHEA")];
+    }
+    if (self.copypastaDylibExist){
+        [thirdPartArray addObject:LOCALIZED(@"SHORT_COPYPASTA")];
     }
     return thirdPartArray;
 }

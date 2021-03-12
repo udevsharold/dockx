@@ -243,3 +243,6 @@
 "SHORT_SPONGEBOB" = "sPoNge";
 "LONG_SPONGEBOB" = "sPonGeBob teXt";
 "TOAST_SPONGEBOB" = "sPoNge";
+"SHORT_COPYPASTA" = "Cpasta";
+"LONG_COPYPASTA" = "Copypasta";
+"TOAST_COPYPASTA" = "Copypasta";
