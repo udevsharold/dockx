@@ -45,7 +45,6 @@ static const NSBundle *tweakBundle;
         self.wasabiDylibExist = [self dylibExist:wasabiDylib manager:fileManager];
         self.pasitheaDylibExist = [self dylibExist:pasitheaDylib manager:fileManager];
         self.copypastaDylibExist = [self dylibExist:copypastaDylib manager:fileManager];
-        HBLogDebug(@"copypastaDylibExist: %d", self.copypastaDylibExist?1:0);
     }
     return self;
 }

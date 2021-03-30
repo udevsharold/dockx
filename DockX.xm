@@ -2351,6 +2351,7 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
             }
         }else{
             //HBLogDebug(@"ELSEEEEEE");
+            HBLogDebug(@"self.kbType: %@", self.kbType);
             int kbTypeInt = [self.kbType[0] intValue];
             int i = 1;
             while (kbTypeInt == (int)[delegate keyboardType]){
@@ -4070,8 +4071,8 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
                 //HBLogDebug(@"indexXXXXX: %lu", index);
                 if (index == NSNotFound){
                     //HBLogDebug(@"INDEXOF: %@", [NSNumber numberWithInt:[delegate keyboardType]]);
-                    NSMutableArray *kbTypeMutable = [NSMutableArray array];
-                    NSMutableArray *kbTypeLabelMutable = [NSMutableArray array];
+                    NSMutableArray *kbTypeMutable = [self.dockx.kbType mutableCopy];
+                    NSMutableArray *kbTypeLabelMutable = [self.dockx.kbTypeLabel mutableCopy];
                     
                     NSUInteger indexInArray = [self.dockx.keyboardTypeDataFull indexOfObject:[NSNumber numberWithInt:[delegate keyboardType]]];
                     if (index == NSNotFound){

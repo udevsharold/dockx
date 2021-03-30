@@ -461,10 +461,7 @@ static NSBundle *tweakBundle;
     }
     
     //NSArray *defaultOrder = @[@"Select All", @"Copy", @"Paste", @"Cut", @"Undo", @"Redo"];
-    BOOL newShortcutsAvailable = NO;
-    if (prefs[@"shortcuts"] && ([prefs[@"shortcuts"] firstObject] != nil)){
-        newShortcutsAvailable = defaultOrderLabel.count > (((NSArray *)prefs[@"shortcuts"][0]).count + ((NSArray *)prefs[@"shortcuts"][1]).count);
-    }
+    BOOL newShortcutsAvailable = YES;
     self.currentOrder = [NSMutableArray array];
     self.currentOrder[0] = [NSMutableArray array];
     self.currentOrder[1] = [NSMutableArray array];
