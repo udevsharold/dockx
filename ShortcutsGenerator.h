@@ -3,6 +3,7 @@
 #define wasabiDylib @"/Library/MobileSubstrate/DynamicLibraries/Wasabi.dylib"
 #define pasitheaDylib @"/Library/MobileSubstrate/DynamicLibraries/Pasithea2.dylib"
 #define copypastaDylib @"/Library/MobileSubstrate/DynamicLibraries/Copypasta.dylib"
+#define loupeDylib @"/Library/MobileSubstrate/DynamicLibraries/Loupe.dylib"
 
 @interface ShortcutsGenerator : NSObject
 @property (nonatomic, assign) BOOL copyLogDylibExist;
@@ -10,6 +11,7 @@
 @property (nonatomic, assign) BOOL wasabiDylibExist;
 @property (nonatomic, assign) BOOL pasitheaDylibExist;
 @property (nonatomic, assign) BOOL copypastaDylibExist;
+@property (nonatomic, assign) BOOL loupeDylibExist;
 +(void)load;
 +(instancetype)sharedInstance;
 -(instancetype)init;

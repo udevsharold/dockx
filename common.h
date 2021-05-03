@@ -15,6 +15,7 @@
 #define kPrefsChangedIdentifier @"com.udevs.dockx/prefschanged"
 #define kAutoCorrectionChangedIdentifier @"com.udevs.dockx/autocorrectionchanged"
 #define kAutoCapitalizationChangedIdentifier @"com.udevs.dockx/autocapitalizationchanged"
+#define kLoupeChangedIdentifier @"com.udevs.dockx/loupechanged"
 #define kPrefsPath @"/var/mobile/Library/Preferences/com.udevs.dockx.plist"
 
 #define kCopyLogOpenVewIdentifier @"me.tomt000.copylog.showView"

@@ -246,3 +246,6 @@
 "SHORT_COPYPASTA" = "Cpasta";
 "LONG_COPYPASTA" = "Copypasta";
 "TOAST_COPYPASTA" = "Copypasta";
+"SHORT_LOUPE" = "Loupe";
+"LONG_LOUPE" = "Loupe";
+"TOAST_LOUPE" = "Loupe";

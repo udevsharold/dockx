@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, direction) {
 @property (nonatomic, assign) BOOL isSameProcess;
 @property (strong, nonatomic) DockXCell *autoCorrectionCell;
 @property (strong, nonatomic) DockXCell *autoCapitalizationCell;
+@property (strong, nonatomic) DockXCell *loupeCell;
 //@property (strong, nonatomic) UIButton *keyboardInputTypeButton;
 @property (strong, nonatomic) __block DockXCell *keyboardInputTypeCell;
 
@@ -26,6 +27,7 @@ typedef NS_ENUM(NSInteger, direction) {
 @property (nonatomic, assign) BOOL firstInit;
 @property (nonatomic, assign) BOOL autoCorrectionEnabled;
 @property (nonatomic, assign) BOOL autoCapitalizationEnabled;
+@property (nonatomic, assign) BOOL loupeEnabled;
 @property (nonatomic, strong) dispatch_block_t retestDispatchBlock;
 @property (nonatomic, strong) dispatch_block_t autoPaginationDispatchBlock;
 @property (nonatomic, assign) NSTimer *cursorTimer;

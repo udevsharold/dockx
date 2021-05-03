@@ -365,7 +365,8 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
             cache[@"wasabiDylibExist"] = @(self.shortcutsGenerator.wasabiDylibExist);
             cache[@"pasitheaDylibExist"] = @(self.shortcutsGenerator.pasitheaDylibExist);
             cache[@"copypastaDylibExist"] = @(self.shortcutsGenerator.copypastaDylibExist);
-
+            cache[@"loupeDylibExist"] = @(self.shortcutsGenerator.loupeDylibExist);
+            
             
             if (prefs[@"shortcuts"]){
                 
@@ -383,6 +384,9 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
                         continue;
                     }
                     if ([item[@"selector"] isEqualToString:@"copypastaAction:"] && !self.shortcutsGenerator.copypastaDylibExist){
+                        continue;
+                    }
+                    if ([item[@"selector"] isEqualToString:@"loupeAction:"] && !self.shortcutsGenerator.loupeDylibExist){
                         continue;
                     }
                     [currentOrder12 addObject:item[@"images12"]];
@@ -477,6 +481,7 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollForward:) name:@"scrollForward" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAutoCorrection:) name:@"updateAutoCorrection" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAutoCapitalization:) name:@"updateAutoCapitalization" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLoupe:) name:@"updateLoupe" object:nil];
         //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateKeyboardType:) name:UITextFieldTextDidBeginEditingNotification object:nil];
         
     }
@@ -503,6 +508,7 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"scrollForward" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateAutoCorrection" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateAutoCapitalization" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateLoupe" object:nil];
     //[[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidBeginEditingNotification object:nil];
     
 }
@@ -1103,6 +1109,12 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
         }else{
             return  !self.autoCapitalizationEnabled?@"shift_on_portrait":@"shift_portrait";
         }
+    }else if ([actionname isEqualToString:@"loupeAction:"]){
+        if (@available(iOS 13.0, *)){
+            return  !self.loupeEnabled?@"magnifyingglass.circle.fill":@"magnifyingglass.circle";
+        }else{
+            return  !self.loupeEnabled?@"kb-loupe-hi":@"kb-loupe-lo";
+        }
     }
     
     
@@ -1219,6 +1231,8 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
             actionName = !self.autoCorrectionEnabled?LOCALIZED(@"TOAST_ON"):LOCALIZED(@"TOAST_OFF");
         }else if ([selname isEqualToString:@"autoCapitalizationAction:"]){
             actionName = !self.autoCapitalizationEnabled?LOCALIZED(@"TOAST_ON"):LOCALIZED(@"TOAST_OFF");
+        }else if ([selname isEqualToString:@"loupeAction:"]){
+            actionName = !self.loupeEnabled?LOCALIZED(@"TOAST_ON"):LOCALIZED(@"TOAST_OFF");
         }
         /*
          else if ([selname isEqualToString:@"insertTextAction:"]){
@@ -2327,6 +2341,43 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
     [self autoPaginationControl];
 }
 
+-(void)updateLoupe:(NSNotification*)notification{
+    if (!self.isSameProcess && !self.loupeCell.hidden){
+        if (!self.asyncUpdated) self.loupeEnabled = loupeSwitchState();
+
+        NSMutableAttributedString *imageOfName = [[NSMutableAttributedString alloc] initWithString:@""];
+        
+        UIImage *image;
+        
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:[DockXHelper localizedStringForActionNamed:@"loupeAction:" shortName:YES bundle:tweakBundle]];
+        NSMutableAttributedString *strikedAttributeString = [attributeString mutableCopy];
+        [strikedAttributeString addAttribute:NSStrikethroughStyleAttributeName value:@2 range:NSMakeRange(0, [attributeString length])];
+        
+        if (@available(iOS 13.0, *)){
+            if (useShortenedLabel){
+                imageOfName = self.loupeEnabled?attributeString:strikedAttributeString;
+            }else{
+                image = [UIImage systemImageNamed:self.loupeEnabled?@"magnifyingglass.circle.fill":@"magnifyingglass.circle"];
+            }
+        }else{
+            if (useShortenedLabel){
+                imageOfName = self.loupeEnabled?attributeString:strikedAttributeString;
+            }else{
+                image = [UIImage imageNamed:self.loupeEnabled?@"kb-loupe-hi":@"kb-loupe-lo" inBundle:[NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/UIKitCore.framework/Artwork.bundle"] compatibleWithTraitCollection:NULL];
+            }
+        }
+        if (useShortenedLabel){
+            [self.loupeCell.btn setImage:nil forState:UIControlStateNormal];
+            [self.loupeCell.btn setAttributedTitle:imageOfName forState:UIControlStateNormal];
+        }else{
+            [self.loupeCell.btn setAttributedTitle:nil forState:UIControlStateNormal];
+            [self.loupeCell.btn setImage:image forState:UIControlStateNormal];
+        }
+    }
+    self.asyncUpdated = NO;
+    self.isSameProcess = NO;
+}
+
 -(void)keyboardTypeAction:(UIButton*)sender{
     [self autoPaginationControl];
     kbImpl = [objc_getClass("UIKeyboardImpl") activeInstance];
@@ -2607,6 +2658,49 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
     }
     [self triggerImpactAndAnimationWithButton:sender selectorName:NSStringFromSelector(_cmd) toastWidthOffset:0 toastHeightOffset:0];
     showCopypastaWithNotification();
+    [self autoPaginationControl];
+}
+
+-(void)loupeAction:(UIButton*)sender{
+    [self autoPaginationControl];
+    if (!self.shortcutsGenerator.loupeDylibExist){
+        [self autoPaginationControl];
+        return;
+    }
+    
+    self.loupeEnabled = loupeSwitchState();
+    flipLoupeEnableSwitch(!self.loupeEnabled);
+    self.isSameProcess = YES;
+    [self triggerImpactAndAnimationWithButton:sender selectorName:NSStringFromSelector(_cmd) toastWidthOffset:0 toastHeightOffset:0];
+    NSMutableAttributedString *imageOfName = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    UIImage *image;
+    
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:[DockXHelper localizedStringForActionNamed:@"loupeAction:" shortName:YES bundle:tweakBundle]];
+    NSMutableAttributedString *strikedAttributeString = [attributeString mutableCopy];
+    [strikedAttributeString addAttribute:NSStrikethroughStyleAttributeName value:@2 range:NSMakeRange(0, [attributeString length])];
+    
+    if (@available(iOS 13.0, *)){
+        if (useShortenedLabel){
+            imageOfName = !self.loupeEnabled?attributeString:strikedAttributeString;
+        }else{
+            image = [UIImage systemImageNamed:(!self.loupeEnabled)?@"magnifyingglass.circle.fill":@"magnifyingglass.circle"];
+        }
+    }else{
+        if (useShortenedLabel){
+            imageOfName = !self.loupeEnabled?attributeString:strikedAttributeString;
+        }else{
+            image = [UIImage imageNamed:(!self.loupeEnabled)?@"kb-loupe-hi":@"kb-loupe-lo" inBundle:[NSBundle bundleWithPath:@"/System/Library/PrivateFrameworks/UIKitCore.framework/Artwork.bundle"] compatibleWithTraitCollection:NULL];
+        }
+    }
+    if (useShortenedLabel){
+        [sender setImage:nil forState:UIControlStateNormal];
+        [sender setAttributedTitle:imageOfName forState:UIControlStateNormal];
+    }else{
+        [sender setAttributedTitle:nil forState:UIControlStateNormal];
+        [sender setImage:image forState:UIControlStateNormal];
+    }
+    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)kLoupeChangedIdentifier, NULL, NULL, YES);
     [self autoPaginationControl];
 }
 
@@ -3832,6 +3926,28 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
             imageOfName = useShortenedLabel ? self.autoCapitalizationEnabled?attributeString:strikedAttributeString : self.autoCapitalizationEnabled?[@"shift_on_portrait" attributedString]:[@"shift_portrait" attributedString];
         }
         if (!useShortenedLabel) image = [DockXHelper imageForName:imageOfName.string  withSystemColor:NO completion:nil];
+    }else if ([selectorName isEqualToString:@"loupeAction:"]){
+        self.loupeCell = cell;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            self.loupeEnabled = loupeSwitchState();
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                self.isSameProcess = NO;
+                self.asyncUpdated = YES;
+                [self updateLoupe:nil];
+            });
+        });
+        
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:[DockXHelper localizedStringForActionNamed:selectorName shortName:YES bundle:tweakBundle]];
+        NSMutableAttributedString *strikedAttributeString = [attributeString mutableCopy];
+        [strikedAttributeString addAttribute:NSStrikethroughStyleAttributeName value:@2 range:NSMakeRange(0, [attributeString length])];
+        
+        if (@available(iOS 13.0, *)){
+            imageOfName = useShortenedLabel ? self.loupeEnabled?attributeString:strikedAttributeString : self.loupeEnabled?[@"magnifyingglass.circle.fill" attributedString]:[@"magnifyingglass.circle" attributedString];
+        }else{
+            imageOfName = useShortenedLabel ? self.loupeEnabled?attributeString:strikedAttributeString : self.loupeEnabled?[@"kb-loupe-hi" attributedString]:[@"kb-loupe-lo" attributedString];
+        }
+        if (!useShortenedLabel) image = [DockXHelper imageForName:imageOfName.string  withSystemColor:NO completion:nil];
     }else if ([selectorName isEqualToString:@"keyboardTypeAction:"]){
         self.keyboardInputTypeCell = cell;
         self.keyboardInputTypeCellIndexPath = indexPath;
@@ -4959,6 +5075,11 @@ static void updateAutoCapitalization() {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"updateAutoCapitalization" object:nil];
 }
 
+static void updateLoupe() {
+    //HBLogDebug(@"received: %@", dockView.dockx);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateLoupe" object:nil];
+}
+
 static void reloadPrefs() {
     prefs = [[[PrefsManager sharedInstance] readPrefsFromSandbox:!isSpringBoard] mutableCopy];
     
@@ -4969,7 +5090,7 @@ static void reloadPrefs() {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 ShortcutsGenerator *shortcutsGenerator = [ShortcutsGenerator sharedInstance];
                 HBLogDebug(@"cache: %d ** actual: %d", ([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue]), ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue]));
-                if (prefs[kCachekey] && (([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue] + [prefs[kCachekey][@"copypastaDylibExist"] intValue]) != ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue] + [@(shortcutsGenerator.copypastaDylibExist) intValue]))){
+                if (prefs[kCachekey] && (([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue] + [prefs[kCachekey][@"copypastaDylibExist"] intValue]  + [prefs[kCachekey][@"loupeDylibExist"] intValue]) != ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue] + [@(shortcutsGenerator.copypastaDylibExist) intValue] + [@(shortcutsGenerator.loupeDylibExist) intValue]))){
                     [[PrefsManager sharedInstance] removeKey:kCachekey fromSandbox:!isSpringBoard];
                     HBLogDebug(@"cache deleted");
                 }
@@ -5094,6 +5215,8 @@ static void reloadPrefs() {
                     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)reloadPrefs, (CFStringRef)kPrefsChangedIdentifier, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
                     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)updateAutoCorrection, (CFStringRef)kAutoCorrectionChangedIdentifier, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
                     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)updateAutoCapitalization, (CFStringRef)kAutoCapitalizationChangedIdentifier, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+                    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)updateLoupe, (CFStringRef)kLoupeChangedIdentifier, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+                    
                 }
                 
             }

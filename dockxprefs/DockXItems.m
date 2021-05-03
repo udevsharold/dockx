@@ -383,7 +383,7 @@ static NSBundle *tweakBundle;
 }
 
 
-- (void)writeToFile {
+- (void)writeToFile{
     
     PSSpecifier *defaultOrderSpecifier = [PSSpecifier preferenceSpecifierNamed:@"" target:self set:@selector(setPreferenceValue:specifier:) get:@selector(readPreferenceValue:) detail:nil cell:PSLinkListCell edit:nil];
     [defaultOrderSpecifier setProperty:self.currentOrder forKey:@"default"];
@@ -473,6 +473,7 @@ static NSBundle *tweakBundle;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"wasabiAction:"] && !shortcutsGenerator.wasabiDylibExist) continue;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"pasitheaAction:"] && !shortcutsGenerator.pasitheaDylibExist) continue;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"copypastaAction:"] && !shortcutsGenerator.copypastaDylibExist) continue;
+            if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"loupeAction:"] && !shortcutsGenerator.loupeDylibExist) continue;
             [self.currentOrder[0] addObject:[currentOrderDefault objectAtIndex:i]];
         }
     }else{
@@ -485,6 +486,7 @@ static NSBundle *tweakBundle;
             if ([defaultOrderSelector[i] isEqualToString:@"wasabiAction:"] && !shortcutsGenerator.wasabiDylibExist) continue;
             if ([defaultOrderSelector[i] isEqualToString:@"pasitheaAction:"] && !shortcutsGenerator.pasitheaDylibExist) continue;
             if ([defaultOrderSelector[i] isEqualToString:@"copypastaAction:"] && !shortcutsGenerator.copypastaDylibExist) continue;
+            if ([defaultOrderSelector[i] isEqualToString:@"loupeAction:"] && !shortcutsGenerator.loupeDylibExist) continue;
             [defaultOrderDict addObject: @{
                 @"label" : defaultOrderLabel[i],
                 @"images12" : defaultOrder12[i],
@@ -504,6 +506,7 @@ static NSBundle *tweakBundle;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"wasabiAction:"] && !shortcutsGenerator.wasabiDylibExist) continue;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"pasitheaAction:"] && !shortcutsGenerator.pasitheaDylibExist) continue;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"copypastaAction:"] && !shortcutsGenerator.copypastaDylibExist) continue;
+            if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"loupeAction:"] && !shortcutsGenerator.loupeDylibExist) continue;
             [self.currentOrder[1] addObject:[currentOrderDefault objectAtIndex:i]];
         }
         if (newShortcutsAvailable){
@@ -514,6 +517,7 @@ static NSBundle *tweakBundle;
                 if ([[defaultOrderSelector objectAtIndex:i] isEqualToString:@"wasabiAction:"] && !shortcutsGenerator.wasabiDylibExist) continue;
                 if ([[defaultOrderSelector objectAtIndex:i] isEqualToString:@"pasitheaAction:"] && !shortcutsGenerator.pasitheaDylibExist) continue;
                 if ([[defaultOrderSelector objectAtIndex:i] isEqualToString:@"copypastaAction:"] && !shortcutsGenerator.copypastaDylibExist) continue;
+                if ([[defaultOrderSelector objectAtIndex:i] isEqualToString:@"loupeAction:"] && !shortcutsGenerator.loupeDylibExist) continue;
                 [fullOrderDict addObject: @{
                     @"label" : defaultOrderLabel[i],
                     @"images12" : defaultOrder12[i],
@@ -551,6 +555,7 @@ static NSBundle *tweakBundle;
             if ([defaultOrderSelector[i] isEqualToString:@"wasabiAction:"] && !shortcutsGenerator.wasabiDylibExist) continue;
             if ([defaultOrderSelector[i] isEqualToString:@"pasitheaAction:"] && !shortcutsGenerator.pasitheaDylibExist) continue;
             if ([defaultOrderSelector[i] isEqualToString:@"copypastaAction:"] && !shortcutsGenerator.copypastaDylibExist) continue;
+            if ([defaultOrderSelector[i] isEqualToString:@"loupeAction:"] && !shortcutsGenerator.loupeDylibExist) continue;
             [defaultOrderDict addObject: @{
                 @"label" : defaultOrderLabel[i],
                 @"images12" : defaultOrder12[i],

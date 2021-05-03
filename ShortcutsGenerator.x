@@ -45,6 +45,7 @@ static const NSBundle *tweakBundle;
         self.wasabiDylibExist = [self dylibExist:wasabiDylib manager:fileManager];
         self.pasitheaDylibExist = [self dylibExist:pasitheaDylib manager:fileManager];
         self.copypastaDylibExist = [self dylibExist:copypastaDylib manager:fileManager];
+        self.loupeDylibExist = [self dylibExist:loupeDylib manager:fileManager];
     }
     return self;
 }
@@ -54,7 +55,7 @@ static const NSBundle *tweakBundle;
     // 1 = iOS 13+
     NSArray *array;
     if (iosVersion == 0){
-        array = @[@"UIButtonBarListIcon",@"UIButtonBarKeyboardCopy",@"UIButtonBarKeyboardPaste",@"UIButtonBarKeyboardCut",@"UIButtonBarKeyboardUndo",@"UIButtonBarKeyboardRedo", @"UIButtonBarKeyboardItalic", @"UIButtonBarArrowLeft", @"UIButtonBarArrowRight", @"shift_portrait_skinny", @"UIButtonBarArrowDown", @"shift_lock_portrait_skinny", @"delete_portrait", @"UIButtonBarKeyboardBold", @"UIButtonBarKeyboardItalic", @"UIButtonBarKeyboardUnderline", @"bold_dismiss_landscape", @"Black_BreadcrumbArrowLeft", @"Black_BreadcrumbArrowRight", @"UIAccessoryButtonCheckmark", @"shift_on_portrait", @"reachable_full", @"KeyGlyph-upArrow-large", @"KeyGlyph-downArrow-large", @"UITabBarSearchTemplate", @"KeyGlyph-command-large", @"messages_writeboard", @"UICalloutBarPreviousArrow", @"UICalloutBarNextArrow", @"KeyGlyph-rtlTab-larg", @"KeyGlyph-tab-large", @"KeyGlyph-return-large", @"KeyGlyph-rtlReturn-large", @"UIMovieScrubberEditingGlassLeft", @"UIMovieScrubberEditingGlassRight", @"UIRemoveControlMinusStroke", @"UITableGrabber", @"UIButtonBarListIcon", @"globe_dockitem-portrait", @"dictation_dockitem-portrait", @"delete_portrait", @"bold_emoji_activity"];
+        array = @[@"UIButtonBarListIcon",@"UIButtonBarKeyboardCopy",@"UIButtonBarKeyboardPaste",@"UIButtonBarKeyboardCut",@"UIButtonBarKeyboardUndo",@"UIButtonBarKeyboardRedo", @"UIButtonBarKeyboardItalic", @"UIButtonBarArrowLeft", @"UIButtonBarArrowRight", @"shift_portrait_skinny", @"UIButtonBarArrowDown", @"shift_lock_portrait_skinny", @"delete_portrait", @"UIButtonBarKeyboardBold", @"UIButtonBarKeyboardItalic", @"UIButtonBarKeyboardUnderline", @"bold_dismiss_landscape", @"Black_BreadcrumbArrowLeft", @"Black_BreadcrumbArrowRight", @"UIAccessoryButtonCheckmark", @"shift_on_portrait", @"reachable_full", @"KeyGlyph-upArrow-large", @"KeyGlyph-downArrow-large", @"UITabBarSearchTemplate", @"KeyGlyph-command-large", @"messages_writeboard", @"UICalloutBarPreviousArrow", @"UICalloutBarNextArrow", @"KeyGlyph-rtlTab-large", @"KeyGlyph-tab-large", @"KeyGlyph-return-large", @"KeyGlyph-rtlReturn-large", @"UIMovieScrubberEditingGlassLeft", @"UIMovieScrubberEditingGlassRight", @"UIRemoveControlMinusStroke", @"UITableGrabber", @"UIButtonBarListIcon", @"globe_dockitem-portrait", @"dictation_dockitem-portrait", @"delete_portrait", @"bold_emoji_activity"];
     }else{
         array = @[@"doc.text",@"doc.on.doc",@"doc.on.clipboard",@"scissors",@"arrow.uturn.left.circle",@"arrow.uturn.right.circle", @"text.cursor", @"chevron.left.circle", @"chevron.right.circle", @"textformat.alt", @"textformat.abc", @"capslock", @"delete.left", @"bold", @"italic", @"underline", @"keyboard.chevron.compact.down", @"arrowtriangle.left.circle.fill", @"arrowtriangle.right.circle.fill", @"checkmark.circle.fill", @"shift.fill", @"number.circle.fill", @"arrowtriangle.up.circle.fill", @"arrowtriangle.down.circle.fill", @"doc.text.magnifyingglass", @"command", @"text.bubble", @"arrow.left.circle.fill", @"arrow.right.circle.fill", @"arrow.left.to.line", @"arrow.right.to.line", @"text.insert", @"text.append", @"decrease.quotelevel", @"increase.quotelevel", @"line.horizontal.3", @"paragraph", @"list.bullet", @"globe", @"mic", @"delete.right", @"circle.grid.3x3"];
     }
@@ -121,6 +122,13 @@ static const NSBundle *tweakBundle;
             [thirdPartArray addObject:@"rectangle.and.paperclip"];
         }
     }
+    if (self.loupeDylibExist){
+        if (iosVersion == 0){
+            [thirdPartArray addObject:@"kb-loupe-hi"];
+        }else{
+            [thirdPartArray addObject:@"magnifyingglass.circle.fill"];
+        }
+    }
     return thirdPartArray;
 }
 
@@ -161,6 +169,13 @@ static const NSBundle *tweakBundle;
             [thirdPartArray addObject:@"copypastaAction:"];
         }
     }
+    if (self.loupeDylibExist){
+        if (longPress){
+            [thirdPartArray addObject:@"loupeActionLP:"];
+        }else{
+            [thirdPartArray addObject:@"loupeAction:"];
+        }
+    }
     return thirdPartArray;
 }
 
@@ -181,6 +196,9 @@ static const NSBundle *tweakBundle;
     if (self.copypastaDylibExist){
         [thirdPartArray addObject:LOCALIZED(@"LONG_COPYPASTA")];
     }
+    if (self.loupeDylibExist){
+        [thirdPartArray addObject:LOCALIZED(@"LONG_LOUPE")];
+    }
     return thirdPartArray;
 }
 
@@ -200,6 +218,9 @@ static const NSBundle *tweakBundle;
     }
     if (self.copypastaDylibExist){
         [thirdPartArray addObject:LOCALIZED(@"SHORT_COPYPASTA")];
+    }
+    if (self.loupeDylibExist){
+        [thirdPartArray addObject:LOCALIZED(@"SHORT_LOUPE")];
     }
     return thirdPartArray;
 }

@@ -7,6 +7,8 @@ extern "C" {
 #endif
 
 void showCopypastaWithNotification() __attribute__((weak));
+void flipLoupeEnableSwitch(BOOL enable) __attribute__((weak));
+BOOL loupeSwitchState() __attribute__((weak));
 
 #ifdef __cplusplus
 }
