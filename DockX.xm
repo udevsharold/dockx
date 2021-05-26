@@ -2656,6 +2656,10 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
         [self autoPaginationControl];
         return;
     }
+    if (!dlsym(RTLD_DEFAULT, "showCopypastaWithNotification")){
+        [self autoPaginationControl];
+        return;
+    }
     [self triggerImpactAndAnimationWithButton:sender selectorName:NSStringFromSelector(_cmd) toastWidthOffset:0 toastHeightOffset:0];
     showCopypastaWithNotification();
     [self autoPaginationControl];
@@ -2664,6 +2668,10 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
 -(void)loupeAction:(UIButton*)sender{
     [self autoPaginationControl];
     if (!self.shortcutsGenerator.loupeDylibExist){
+        [self autoPaginationControl];
+        return;
+    }
+    if (!dlsym(RTLD_DEFAULT, "flipLoupeEnableSwitch") || !dlsym(RTLD_DEFAULT, "flipLoupeEnableSwitch")){
         [self autoPaginationControl];
         return;
     }
