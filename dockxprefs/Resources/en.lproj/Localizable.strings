@@ -51,6 +51,7 @@
 "SHORT_SPONGEBOB" = "sPoNge";
 "SHORT_COPYPASTA" = "Cpasta";
 "SHORT_LOUPE" = "Loupe";
+"SHORT_TRANZLO" = "Trnzlo";
 
 //=====================Long Text for Shortcuts=====================
 //Used for showing shortcuts name in "Manage Shortcuts" etc.
@@ -102,6 +103,7 @@
 "LONG_SPONGEBOB" = "sPonGeBob teXt";
 "LONG_COPYPASTA" = "Copypasta";
 "LONG_LOUPE" = "Loupe";
+"LONG_TRANZLO" = "Tranzlo";
 
 //=====================Toast=====================
 "TOAST_SELECT_ALL" = "Select All";
@@ -152,6 +154,7 @@
 "TOAST_SPONGEBOB" = "sPoNge";
 "TOAST_COPYPASTA" = "Copypasta";
 "TOAST_LOUPE" = "Loupe";
+"TOAST_TRANZLO" = "Tranzlo";
 "TOAST_ON" = "On";
 "TOAST_OFF" = "Off";
 "TOAST_KEYBOARD_TYPE_GENERIC" = "Generic";

@@ -46,6 +46,7 @@ static const NSBundle *tweakBundle;
         self.pasitheaDylibExist = [self dylibExist:pasitheaDylib manager:fileManager];
         self.copypastaDylibExist = [self dylibExist:copypastaDylib manager:fileManager];
         self.loupeDylibExist = [self dylibExist:loupeDylib manager:fileManager];
+        self.tranzloDylibExist = [self dylibExist:tranzloDylib manager:fileManager];
     }
     return self;
 }
@@ -129,6 +130,9 @@ static const NSBundle *tweakBundle;
             [thirdPartArray addObject:@"magnifyingglass.circle.fill"];
         }
     }
+    if (self.tranzloDylibExist){
+        [thirdPartArray addObject:@"CUSTOM_/Library/Shortmoji/Shortcuts/TranzloTranslateShortcut.bundle/icon.png"];
+    }
     return thirdPartArray;
 }
 
@@ -176,6 +180,13 @@ static const NSBundle *tweakBundle;
             [thirdPartArray addObject:@"loupeAction:"];
         }
     }
+    if (self.tranzloDylibExist){
+        if (longPress){
+            [thirdPartArray addObject:@"tranzloActionLP:"];
+        }else{
+            [thirdPartArray addObject:@"tranzloAction:"];
+        }
+    }
     return thirdPartArray;
 }
 
@@ -199,6 +210,9 @@ static const NSBundle *tweakBundle;
     if (self.loupeDylibExist){
         [thirdPartArray addObject:LOCALIZED(@"LONG_LOUPE")];
     }
+    if (self.tranzloDylibExist){
+        [thirdPartArray addObject:LOCALIZED(@"LONG_TRANZLO")];
+    }
     return thirdPartArray;
 }
 
@@ -221,6 +235,9 @@ static const NSBundle *tweakBundle;
     }
     if (self.loupeDylibExist){
         [thirdPartArray addObject:LOCALIZED(@"SHORT_LOUPE")];
+    }
+    if (self.tranzloDylibExist){
+        [thirdPartArray addObject:LOCALIZED(@"SHORT_TRANZLO")];
     }
     return thirdPartArray;
 }

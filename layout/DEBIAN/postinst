@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mkdir /private/var/mobile/Library/Caches/com.udevs.dockx || true
+chown mobile:mobile /private/var/mobile/Library/Caches/com.udevs.dockx
+chmod 0755 /private/var/mobile/Library/Caches/com.udevs.dockx
+
+exit 0

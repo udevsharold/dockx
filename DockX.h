@@ -332,6 +332,12 @@ typedef enum PSCellType {
 +(void)fetchTranslation:(NSString *)text vc:(UIViewController *)vc;
 @end
 
+@interface TZManager : NSObject
++(instancetype)sharedManager;
+- (void)translateTextWithShortmojiShortcut:(NSString *)text  showInAlert:(BOOL)show;
+- (void)translateText:(NSString *)text;
+@end
+
 @interface UIKeyboardInputMode : UITextInputMode
 -(NSString *)identifier;
 -(NSString *)normalizedIdentifier;

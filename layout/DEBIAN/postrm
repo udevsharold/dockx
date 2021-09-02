@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm -rf /private/var/mobile/Library/Caches/com.udevs.dockx || true
+
+exit 0

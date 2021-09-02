@@ -367,6 +367,7 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
             cache[@"pasitheaDylibExist"] = @(self.shortcutsGenerator.pasitheaDylibExist);
             cache[@"copypastaDylibExist"] = @(self.shortcutsGenerator.copypastaDylibExist);
             cache[@"loupeDylibExist"] = @(self.shortcutsGenerator.loupeDylibExist);
+            cache[@"tranzloDylibExist"] = @(self.shortcutsGenerator.tranzloDylibExist);
             
             
             if (prefs[@"shortcuts"]){
@@ -388,6 +389,9 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
                         continue;
                     }
                     if ([item[@"selector"] isEqualToString:@"loupeAction:"] && !self.shortcutsGenerator.loupeDylibExist){
+                        continue;
+                    }
+                    if ([item[@"selector"] isEqualToString:@"tranzloAction:"] && !self.shortcutsGenerator.tranzloDylibExist){
                         continue;
                     }
                     [currentOrder12 addObject:item[@"images12"]];
@@ -2345,7 +2349,7 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
 -(void)updateLoupe:(NSNotification*)notification{
     if (!self.isSameProcess && !self.loupeCell.hidden){
         if (!self.asyncUpdated) self.loupeEnabled = loupeSwitchState();
-
+        
         NSMutableAttributedString *imageOfName = [[NSMutableAttributedString alloc] initWithString:@""];
         
         UIImage *image;
@@ -2710,6 +2714,37 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
         [sender setImage:image forState:UIControlStateNormal];
     }
     CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)kLoupeChangedIdentifier, NULL, NULL, YES);
+    [self autoPaginationControl];
+}
+
+-(void)tranzloAction:(UIButton*)sender{
+    [self autoPaginationControl];
+    if (!self.shortcutsGenerator.tranzloDylibExist){
+        [self autoPaginationControl];
+        return;
+    }
+    [self beginImpactAnimationAndUpdateDelegate:_cmd sender:sender toastWidthOffset:0  toastHeightOffset:0];
+    UIResponder <UITextInput> *tempDelegate = (UIResponder <UITextInput> *)delegate;
+    NSString *selectedString = @"";
+    BOOL isWKContentView = [tempDelegate isKindOfClass:objc_getClass("WKContentView")];
+    if (isWKContentView){
+        selectedString = [(WKContentView *)tempDelegate selectedText];
+        [(WKContentView *)tempDelegate select:nil];
+        if ([selectedString length] == 0) return;
+    }else{
+        selectedString = [tempDelegate textInRange:[tempDelegate selectedTextRange]];
+        
+        if (!selectedString.length) {
+            UITextRange *textRange = [self autoDirectionWordSelectedTextRangeWithDelegate:tempDelegate];
+            if (!textRange) return;
+            tempDelegate.selectedTextRange = textRange;
+            selectedString = [tempDelegate textInRange:textRange];
+        }
+        if ([selectedString length] == 0) return;
+        
+    }
+    
+    [[(objc_getClass("TZManager")) sharedManager] translateTextWithShortmojiShortcut:selectedString showInAlert:YES];
     [self autoPaginationControl];
 }
 
@@ -3712,6 +3747,19 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
      [self shakeView:recognizer.view];
      }
      */
+}
+
+-(void)tranzloActionLP:(UILongPressGestureRecognizer *)recognizer{
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        self.hapticType = 0;
+        [self selectParagraphAction:nil];
+        self.hapticType = 2;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(secondActionDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self tranzloAction:nil];
+        });
+    }else if (recognizer.state == UIGestureRecognizerStateEnded){
+        [self shakeView:recognizer.view];
+    }
 }
 
 -(void)globeActionLP:(UILongPressGestureRecognizer *)recognizer{
@@ -5142,7 +5190,7 @@ static void reloadPrefs() {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 ShortcutsGenerator *shortcutsGenerator = [ShortcutsGenerator sharedInstance];
                 HBLogDebug(@"cache: %d ** actual: %d", ([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue]), ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue]));
-                if (prefs[kCachekey] && (([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue] + [prefs[kCachekey][@"copypastaDylibExist"] intValue]  + [prefs[kCachekey][@"loupeDylibExist"] intValue]) != ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue] + [@(shortcutsGenerator.copypastaDylibExist) intValue] + [@(shortcutsGenerator.loupeDylibExist) intValue]))){
+                if (prefs[kCachekey] && (([prefs[kCachekey][@"copyLogDylibExist"] intValue] + [prefs[kCachekey][@"translomaticDylibExist"] intValue] + [prefs[kCachekey][@"wasabiDylibExist"] intValue] + [prefs[kCachekey][@"pasitheaDylibExist"] intValue] + [prefs[kCachekey][@"copypastaDylibExist"] intValue] + [prefs[kCachekey][@"loupeDylibExist"] intValue]  + [prefs[kCachekey][@"tranzloDylibExist"] intValue]) != ([@(shortcutsGenerator.copyLogDylibExist) intValue] + [@(shortcutsGenerator.translomaticDylibExist) intValue] + [@(shortcutsGenerator.wasabiDylibExist) intValue] + [@(shortcutsGenerator.pasitheaDylibExist) intValue] + [@(shortcutsGenerator.copypastaDylibExist) intValue] + [@(shortcutsGenerator.loupeDylibExist) intValue] + [@(shortcutsGenerator.tranzloDylibExist) intValue]))){
                     [[PrefsManager sharedInstance] removeKey:kCachekey fromSandbox:!isSpringBoard];
                     HBLogDebug(@"cache deleted");
                 }

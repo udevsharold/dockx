@@ -480,6 +480,7 @@ static NSBundle *tweakBundle;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"pasitheaAction:"] && !shortcutsGenerator.pasitheaDylibExist) continue;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"copypastaAction:"] && !shortcutsGenerator.copypastaDylibExist) continue;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"loupeAction:"] && !shortcutsGenerator.loupeDylibExist) continue;
+            if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"tranzloAction:"] && !shortcutsGenerator.tranzloDylibExist) continue;
             [self.currentOrder[0] addObject:[currentOrderDefault objectAtIndex:i]];
         }
     }else{
@@ -493,6 +494,7 @@ static NSBundle *tweakBundle;
             if ([defaultOrderSelector[i] isEqualToString:@"pasitheaAction:"] && !shortcutsGenerator.pasitheaDylibExist) continue;
             if ([defaultOrderSelector[i] isEqualToString:@"copypastaAction:"] && !shortcutsGenerator.copypastaDylibExist) continue;
             if ([defaultOrderSelector[i] isEqualToString:@"loupeAction:"] && !shortcutsGenerator.loupeDylibExist) continue;
+            if ([defaultOrderSelector[i] isEqualToString:@"tranzloAction:"] && !shortcutsGenerator.tranzloDylibExist) continue;
             [defaultOrderDict addObject: @{
                 @"label" : defaultOrderLabel[i],
                 @"images12" : defaultOrder12[i],
@@ -513,6 +515,7 @@ static NSBundle *tweakBundle;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"pasitheaAction:"] && !shortcutsGenerator.pasitheaDylibExist) continue;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"copypastaAction:"] && !shortcutsGenerator.copypastaDylibExist) continue;
             if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"loupeAction:"] && !shortcutsGenerator.loupeDylibExist) continue;
+            if ([[currentOrderDefault objectAtIndex:i][@"selector"] isEqualToString:@"tranzloAction:"] && !shortcutsGenerator.tranzloDylibExist) continue;
             [self.currentOrder[1] addObject:[currentOrderDefault objectAtIndex:i]];
         }
         if (newShortcutsAvailable){
@@ -524,6 +527,7 @@ static NSBundle *tweakBundle;
                 if ([[defaultOrderSelector objectAtIndex:i] isEqualToString:@"pasitheaAction:"] && !shortcutsGenerator.pasitheaDylibExist) continue;
                 if ([[defaultOrderSelector objectAtIndex:i] isEqualToString:@"copypastaAction:"] && !shortcutsGenerator.copypastaDylibExist) continue;
                 if ([[defaultOrderSelector objectAtIndex:i] isEqualToString:@"loupeAction:"] && !shortcutsGenerator.loupeDylibExist) continue;
+                if ([[defaultOrderSelector objectAtIndex:i] isEqualToString:@"tranzloAction:"] && !shortcutsGenerator.tranzloDylibExist) continue;
                 [fullOrderDict addObject: @{
                     @"label" : defaultOrderLabel[i],
                     @"images12" : defaultOrder12[i],
@@ -562,6 +566,7 @@ static NSBundle *tweakBundle;
             if ([defaultOrderSelector[i] isEqualToString:@"pasitheaAction:"] && !shortcutsGenerator.pasitheaDylibExist) continue;
             if ([defaultOrderSelector[i] isEqualToString:@"copypastaAction:"] && !shortcutsGenerator.copypastaDylibExist) continue;
             if ([defaultOrderSelector[i] isEqualToString:@"loupeAction:"] && !shortcutsGenerator.loupeDylibExist) continue;
+            if ([defaultOrderSelector[i] isEqualToString:@"tranzloAction:"] && !shortcutsGenerator.tranzloDylibExist) continue;
             [defaultOrderDict addObject: @{
                 @"label" : defaultOrderLabel[i],
                 @"images12" : defaultOrder12[i],

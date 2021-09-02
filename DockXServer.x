@@ -49,7 +49,6 @@ static KeyboardController *kbController;
         [_messagingCenter registerForMessageName:@"getAutoCapitalizationValue" target:self selector:@selector(getAutoCapitalizationValue:withUserInfo:)];
         [_messagingCenter registerForMessageName:@"setAutoCapitalizationValue" target:self selector:@selector(setAutoCapitalizationValue:withUserInfo:)];
         [_messagingCenter registerForMessageName:@"runCommand" target:self selector:@selector(runCommand:withUserInfo:)];
-
     }
 
     return self;
@@ -124,5 +123,4 @@ static KeyboardController *kbController;
     return nil;
 
 }
-
 @end

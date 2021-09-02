@@ -1,7 +1,9 @@
 #include "common.h"
 #include "DockXHelper.h"
+#import "UIImage+Resize.h"
 
 #define UIKitBundleArtwork @"/System/Library/PrivateFrameworks/UIKitCore.framework/Artwork.bundle"
+#define DockXCachePath @"/private/var/mobile/Library/Caches/com.udevs.dockx"
 
 @implementation DockXHelper
 
@@ -15,32 +17,46 @@
 +(UIImage *)imageForName:(NSString *)imageName withSystemColor:(BOOL)withSystemColor completion:(void (^)(BOOL isThirteen, BOOL isCustomImagePath))handler{
     UIImage *image;
     NSString *customPrefix = @"CUSTOM_";
-    NSString *customImagePath = @"";
+    NSString *customPath;
     UIColor *systemBlueColor = [UIColor systemBlueColor];
     BOOL isCustomImagePath = [imageName hasPrefix:customPrefix];
     BOOL isThirteen = NO;
     if (isCustomImagePath){
-        customImagePath = [imageName substringFromIndex:[customPrefix length]];
+        customPath = [imageName substringFromIndex:[customPrefix length]];
     }
+
+    UIImage* (^cacheAndLoadImage)(NSString *, NSString *) = ^(NSString *inputImagePath, NSString *cacheFilePath){
+        UIImage *resizedImage;
+        if (![[NSFileManager defaultManager] fileExistsAtPath:cacheFilePath]){
+            resizedImage = [UIImage imageWithImage:[UIImage imageWithContentsOfFile:inputImagePath] resize:CGSizeMake(24, 24)];
+            //resizedImage = [UIImage imageWithImage:[UIImage imageWithContentsOfFile:inputImagePath] scaledToFitToSize:CGSizeMake(24, 24)];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                [UIImagePNGRepresentation(resizedImage) writeToFile:cacheFilePath options:NSDataWritingAtomic error:nil];
+            });
+        }else{
+            resizedImage = [UIImage imageWithImage:[UIImage imageWithContentsOfFile:cacheFilePath] resize:CGSizeMake(24, 24)];
+            //resizedImage = [UIImage imageWithCGImage:[[UIImage imageWithData:[NSData dataWithContentsOfFile:cacheFilePath]] CGImage] scale:0.5 orientation:UIImageOrientationUp];
+        }
+        return resizedImage;
+    };
+    
+    NSString *cachedImagePath = [NSString stringWithFormat:@"%@/%lu.png", DockXCachePath, customPath.hash];
     
     if (@available(iOS 13.0, *)){
         isThirteen = YES;
+        
         if (isCustomImagePath){
+            image = cacheAndLoadImage(customPath, cachedImagePath);
             if (withSystemColor){
-                image = [[UIImage imageWithContentsOfFile:customImagePath] imageWithTintColor:systemBlueColor];
-            }else{
-                image = [UIImage imageWithContentsOfFile:customImagePath];
+                image = [image imageWithTintColor:systemBlueColor];
             }
         }else{
             image = [UIImage systemImageNamed:imageName];
         }
     }else{
         if (isCustomImagePath){
-            //if (withSystemColor){
-            //image = [[UIImage imageWithContentsOfFile:customImagePath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            //}else{
-            image = [[UIImage imageWithContentsOfFile:customImagePath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            //}
+            image = cacheAndLoadImage(customPath, cachedImagePath);
+            image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         }else{
             image = [UIImage imageNamed:imageName inBundle:[NSBundle bundleWithPath:UIKitBundleArtwork] compatibleWithTraitCollection:NULL];
         }
