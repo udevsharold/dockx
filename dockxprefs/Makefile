@@ -6,7 +6,7 @@ BUNDLE_NAME = DockXPrefs
 
 DockXPrefs_FILES = $(wildcard *.m) $(wildcard *.mm) ../PrefsManager.x ../ShortcutsGenerator.x ../DockXHelper.x
 DockXPrefs_INSTALL_PATH = /Library/PreferenceBundles
-DockXPrefs_FRAMEWORKS = UIKit
+DockXPrefs_FRAMEWORKS = UIKit CoreGraphics
 DockXPrefs_PRIVATE_FRAMEWORKS = Preferences AppSupport
 DockXPrefs_CFLAGS = -fobjc-arc
 DockXPrefs_LIBRARIES = rocketbootstrap sparkcolourpicker

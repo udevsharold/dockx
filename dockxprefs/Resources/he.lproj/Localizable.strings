@@ -249,3 +249,15 @@
 "SHORT_LOUPE" = "Loupe";
 "LONG_LOUPE" = "Loupe";
 "TOAST_LOUPE" = "Loupe";
+
+//=====================Manage Shortcuts=====================
+//Extras
+"EXTRAS_SPONGEBOB_BEHAVIOUR" = "Spongebob Text Behaviour";
+
+//=====================SPONGEBOB BEHAVIOR=====================
+"SPONGEBOB_ENTROPY" = "Randomness of Spongebob Text";
+"FOOTER_SPONGEBOB_ENTROPY" = "Select the entropy for the randomness of generated text.";
+"SPONGEBOB_RANDOM" = "Random";
+"SPONGEBOB_ALTERNATE" = "Alternate";
+"SPONGEBOB_VOWEL" = "Vowel";
+"SPONGEBOB_CONSONENT" = "Consonent";

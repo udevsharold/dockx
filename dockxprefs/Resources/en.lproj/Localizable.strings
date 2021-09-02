@@ -187,6 +187,7 @@
 "EXTRAS_DELETE_FORWARD_BEHAVIOUR" = "Delete Forward Behaviour";
 "EXTRAS_GLOBE_BEHAVIOUR" = "Globe Behaviour";
 "EXTRAS_PASTE_BEHAVIOUR" = "Paste Behaviour";
+"EXTRAS_SPONGEBOB_BEHAVIOUR" = "Spongebob Text Behaviour";
 
 //Title
 "ENABLED_SHORTCUTS" = "Enabled Shorcuts";
@@ -320,6 +321,14 @@ sPonGeBob teXt - select all and sPonGeBob";
 "PASTE_AND_GO_DISABLED" = "Disabled";
 "PASTE_AND_GO_URL_ONLY" = "URL Only";
 "PASTE_AND_GO_EVERYTHING" = "Everything";
+
+//=====================SPONGEBOB BEHAVIOR=====================
+"SPONGEBOB_ENTROPY" = "Randomness of Spongebob Text";
+"FOOTER_SPONGEBOB_ENTROPY" = "Select the entropy for the randomness of generated text.";
+"SPONGEBOB_RANDOM" = "Random";
+"SPONGEBOB_ALTERNATE" = "Alternate";
+"SPONGEBOB_VOWEL" = "Vowel";
+"SPONGEBOB_CONSONENT" = "Consonent";
 
 //=====================MISC=====================
 "SEARCHBAR_PLACEHOLDER" = "How Does It Looks?";

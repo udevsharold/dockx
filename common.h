@@ -67,6 +67,7 @@
 #define kCellRadiuskey @"shortcutradius"
 #define kCellSpacingkey @"shortcutspacing"
 #define kCachekey @"cache"
+#define kSpongebobEntropyKey @"spongebobEntropy"
 
 #define toastWidth 50
 #define toastHeight 50
@@ -115,6 +116,18 @@
 #define cellsRadiusDefault 5
 
 #define secondActionDelay 0.05
+
+typedef NS_ENUM(NSInteger, DXPhonemesType){
+    DXPhonemesTypeVowel,
+    DXPhonemesTypeConsonent
+};
+
+typedef NS_ENUM(NSInteger, DXStudlyCapsType){
+    DXStudlyCapsTypeRandom,
+    DXStudlyCapsTypeAlternate,
+    DXStudlyCapsTypeVowel,
+    DXStudlyCapsTypeConsonent
+};
 
 @interface CPDistributedMessagingCenter : NSObject
 + (id)centerNamed:(id)arg1;

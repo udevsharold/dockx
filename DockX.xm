@@ -41,6 +41,7 @@ static BOOL isPagingEnabled = YES;
 static BOOL useShortenedLabel = NO;
 static NSBundle *tweakBundle;
 static BOOL firstInit = YES;
+static int spongebobEntropy;
 
 float topInset = topInsetDefault;
 float bottomInset = bottomInsetDefault;
@@ -2737,6 +2738,65 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
     [self autoPaginationControl];
 }
 
+-(BOOL)boolWithProbability:(double)probability{
+    return rand() <  probability * ((double)RAND_MAX + 1.0);
+}
+
+-(NSString *)capitalize:(NSString *)theString probability:(double)probability{
+    NSInteger theStrLen = theString.length;
+    if (theStrLen == 0) return theString;
+    NSMutableString *capStr = [NSMutableString stringWithCapacity:theStrLen];
+    for (NSInteger i = 0; i < theStrLen; i++) {
+        NSRange range = NSMakeRange(i, 1);
+        NSString *character = [theString substringWithRange:range];
+        character = [self boolWithProbability:probability] ? [character uppercaseString] : [character lowercaseString];
+        [capStr appendString:character];
+    }
+    return [NSString stringWithString:capStr];
+}
+
+-(NSString *)capitalizeAlternatively:(NSString *)theString{
+    NSInteger theStrLen = theString.length;
+    if (theStrLen == 0) return theString;
+    BOOL firstSeed = [self boolWithProbability:0.5];
+    NSMutableString *capStr = [NSMutableString stringWithCapacity:theStrLen];
+    for (NSInteger i = 0; i < theStrLen; i++) {
+        NSRange range = NSMakeRange(i, 1);
+        NSString *character = [theString substringWithRange:range];
+        character = firstSeed ? [character uppercaseString] : [character lowercaseString];
+        firstSeed = !firstSeed;
+        [capStr appendString:character];
+    }
+    return [NSString stringWithString:capStr];
+}
+
+-(BOOL)isVowel:(NSString *)theString{
+    NSAssert([theString length] == 1, @"Invalid character length");
+    return ([@"aeiou" rangeOfString:[theString lowercaseString]].location != NSNotFound);
+}
+
+-(NSString *)capitalize:(NSString *)theString phonemes:(DXPhonemesType)type{
+    NSInteger theStrLen = theString.length;
+    if (theStrLen == 0) return theString;
+    NSMutableString *capStr = [NSMutableString stringWithCapacity:theStrLen];
+    for (NSInteger i = 0; i < theStrLen; i++) {
+        NSRange range = NSMakeRange(i, 1);
+        NSString *character = [theString substringWithRange:range];
+        switch (type){
+            case DXPhonemesTypeConsonent:{
+                character = ![self isVowel:character] ? [character uppercaseString] : [character lowercaseString];
+                break;
+            }
+            default:{
+                character = [self isVowel:character] ? [character uppercaseString] : [character lowercaseString];
+                break;
+            }
+        }
+        [capStr appendString:character];
+    }
+    return [NSString stringWithString:capStr];
+}
+
 -(void)spongebobAction:(UIButton*)sender{
     [self autoPaginationControl];
     [self beginImpactAnimationAndUpdateDelegate:_cmd sender:sender toastWidthOffset:10  toastHeightOffset:0];
@@ -2761,37 +2821,21 @@ NSString *preferencesSelectorForIdentifier(NSString* identifier, int selectorNum
         
         if (!textRange) return;
         selectedString = [delegate textInRange:[delegate selectedTextRange]];
-        
-        float upperCaseProbability = 0.5;
-        NSMutableString *result = [@"" mutableCopy];
-        NSString *lowercaseStrings = [selectedString lowercaseString];
-        
-        for (int i = 0; i < [selectedString length]; i++) {
-            NSString *chString = [lowercaseStrings substringWithRange:NSMakeRange(i, 1)];
-            BOOL toUppercase = arc4random_uniform(1000) / 1000.0 < upperCaseProbability;
+    }
+    switch (spongebobEntropy){
+        case DXStudlyCapsTypeAlternate:
+            [kbImpl insertText:[self capitalizeAlternatively:selectedString]];
+            break;
+        case DXStudlyCapsTypeVowel:
+            [kbImpl insertText:[self capitalize:selectedString phonemes:DXPhonemesTypeVowel]];
+            break;
+        case DXStudlyCapsTypeConsonent:
+            [kbImpl insertText:[self capitalize:selectedString phonemes:DXPhonemesTypeConsonent]];
+            break;
+        default:
+            [kbImpl insertText:[self capitalize:selectedString probability:0.5]];
+            break;
             
-            if (toUppercase) {
-                chString = [chString uppercaseString];
-            }
-            [result appendString:chString];
-        }
-        [kbImpl insertText:result];
-        
-    }else{
-        float upperCaseProbability = 0.5;
-        NSMutableString *result = [@"" mutableCopy];
-        NSString *lowercaseStrings = [selectedString lowercaseString];
-        
-        for (int i = 0; i < [selectedString length]; i++) {
-            NSString *chString = [lowercaseStrings substringWithRange:NSMakeRange(i, 1)];
-            BOOL toUppercase = arc4random_uniform(1000) / 1000.0 < upperCaseProbability;
-            
-            if (toUppercase) {
-                chString = [chString uppercaseString];
-            }
-            [result appendString:chString];
-        }
-        [kbImpl insertText:result];
     }
     [kbImpl clearTransientState];
     [kbImpl clearAnimations];
@@ -5170,6 +5214,7 @@ static void reloadPrefs() {
     
     isPagingEnabled =  preferencesBool(kPagingkey, YES);
     shouldPerformBatchUpdate = NO;
+    spongebobEntropy = preferencesInt(kSpongebobEntropyKey, 0);
     /*
      if (dockView){
      [UIView performWithoutAnimation:^{

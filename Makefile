@@ -14,6 +14,7 @@ TWEAK_NAME = ADockX
 ADockX_FILES = $(wildcard *.x) $(wildcard *.m) $(wildcard *.xm)
 ADockX_CFLAGS = -fobjc-arc
 ADockX_LIBRARIES = rocketbootstrap sparkcolourpicker
+ADockX_FRAMEWORKS = UIKit CoreGraphics CoreImage QuartzCore
 ADockX_PRIVATE_FRAMEWORKS = AppSupport Preferences
 ADockX_LDFLAGS = -Wl,-U,_showCopypastaWithNotification -Wl,-U,_flipLoupeEnableSwitch -Wl,-U,_loupeSwitchState
 

@@ -10,6 +10,7 @@
 #include "DeleteOptions.h"
 #include "GlobeOptions.h"
 #include "PasteOptions.h"
+#include "SpongebobOptions.h"
 
 static BOOL translomaticInstalled = NO;
 static UISearchController *searchController;
@@ -279,6 +280,11 @@ static NSBundle *tweakBundle;
             [pasteOptions setRootController: [self rootController]];
             [pasteOptions setParentController: [self parentController]];
             [self pushController:pasteOptions];
+        }else if ([self.extrasOptions[indexPath.row][@"identifier"] isEqualToString:@"spongebob"]){
+            SpongebobOptions *spongebobOptions = [[SpongebobOptions alloc] init];
+            [spongebobOptions setRootController: [self rootController]];
+            [spongebobOptions setParentController: [self parentController]];
+            [self pushController:spongebobOptions];
         }
     }
     
@@ -568,10 +574,10 @@ static NSBundle *tweakBundle;
         self.currentOrder[1] = defaultOrderDict;
     }
     
-    NSArray *extrasOptionsLabel = @[LOCALIZED(@"EXTRAS_KEYBOARD_INPUT_BEHAVIOUR"), LOCALIZED(@"EXTRAS_SHELL_COMMANDS"), LOCALIZED(@"EXTRAS_INSERT_TEXT_CONTENT"), LOCALIZED(@"EXTRAS_PREVIOUS_WORD_BEHAVIOUR"), LOCALIZED(@"EXTRAS_NEXT_WORD_BEHAVIOUR"), LOCALIZED(@"EXTRAS_LINE_START_BEHAVIOUR"), LOCALIZED(@"EXTRAS_LINE_END_BEHAVIOUR"), LOCALIZED(@"EXTRAS_START_OF_PARAGRAPH_BEHAVIOUR"), LOCALIZED(@"EXTRAS_END_OF_PARAGRAPH_BEHAVIOUR"), LOCALIZED(@"EXTRAS_START_OF_SENTENCE_BEHAVIOUR"), LOCALIZED(@"EXTRAS_END_OF_SENTENCE_BEHAVIOUR"), LOCALIZED(@"EXTRAS_DELETE_BEHAVIOUR"), LOCALIZED(@"EXTRAS_DELETE_FORWARD_BEHAVIOUR"), LOCALIZED(@"EXTRAS_GLOBE_BEHAVIOUR"), LOCALIZED(@"EXTRAS_PASTE_BEHAVIOUR")];
-    NSArray *extrasOptionsID = @[@"keyboardType", @"shellCommand", @"insertText", @"prevWord", @"nextWord", @"lineStart", @"lineEnd", @"startOfParagraph", @"endOfParagraph", @"startOfSentence", @"endOfSentence", @"delete", @"deleteForward", @"globe", @"paste"];
-    NSArray *extrasOptions12 = @[@"reachable_full", @"KeyGlyph-command-large", @"messages_writeboard", @"UICalloutBarPreviousArrow", @"UICalloutBarNextArrow", @"KeyGlyph-rtlTab-larg", @"KeyGlyph-tab-large", @"KeyGlyph-return-large", @"KeyGlyph-rtlReturn-large", @"UIMovieScrubberEditingGlassLeft", @"UIMovieScrubberEditingGlassRight", @"delete_portrait", @"delete_portrait", @"globe_dockitem-portrait", @"UIButtonBarKeyboardPaste"];
-    NSArray *extrasOptions13 = @[@"number.circle.fill", @"command", @"text.bubble", @"arrow.left.circle.fill", @"arrow.right.circle.fill", @"arrow.left.to.line", @"arrow.right.to.line", @"text.insert", @"text.append", @"decrease.quotelevel", @"increase.quotelevel", @"delete.left", @"delete.right", @"globe", @"doc.on.clipboard"];
+    NSArray *extrasOptionsLabel = @[LOCALIZED(@"EXTRAS_KEYBOARD_INPUT_BEHAVIOUR"), LOCALIZED(@"EXTRAS_SHELL_COMMANDS"), LOCALIZED(@"EXTRAS_INSERT_TEXT_CONTENT"), LOCALIZED(@"EXTRAS_PREVIOUS_WORD_BEHAVIOUR"), LOCALIZED(@"EXTRAS_NEXT_WORD_BEHAVIOUR"), LOCALIZED(@"EXTRAS_LINE_START_BEHAVIOUR"), LOCALIZED(@"EXTRAS_LINE_END_BEHAVIOUR"), LOCALIZED(@"EXTRAS_START_OF_PARAGRAPH_BEHAVIOUR"), LOCALIZED(@"EXTRAS_END_OF_PARAGRAPH_BEHAVIOUR"), LOCALIZED(@"EXTRAS_START_OF_SENTENCE_BEHAVIOUR"), LOCALIZED(@"EXTRAS_END_OF_SENTENCE_BEHAVIOUR"), LOCALIZED(@"EXTRAS_DELETE_BEHAVIOUR"), LOCALIZED(@"EXTRAS_DELETE_FORWARD_BEHAVIOUR"), LOCALIZED(@"EXTRAS_GLOBE_BEHAVIOUR"), LOCALIZED(@"EXTRAS_PASTE_BEHAVIOUR"), LOCALIZED(@"EXTRAS_SPONGEBOB_BEHAVIOUR")];
+    NSArray *extrasOptionsID = @[@"keyboardType", @"shellCommand", @"insertText", @"prevWord", @"nextWord", @"lineStart", @"lineEnd", @"startOfParagraph", @"endOfParagraph", @"startOfSentence", @"endOfSentence", @"delete", @"deleteForward", @"globe", @"paste", @"spongebob"];
+    NSArray *extrasOptions12 = @[@"reachable_full", @"KeyGlyph-command-large", @"messages_writeboard", @"UICalloutBarPreviousArrow", @"UICalloutBarNextArrow", @"KeyGlyph-rtlTab-larg", @"KeyGlyph-tab-large", @"KeyGlyph-return-large", @"KeyGlyph-rtlReturn-large", @"UIMovieScrubberEditingGlassLeft", @"UIMovieScrubberEditingGlassRight", @"delete_portrait", @"delete_portrait", @"globe_dockitem-portrait", @"UIButtonBarKeyboardPaste", @"bold_emoji_activity"];
+    NSArray *extrasOptions13 = @[@"number.circle.fill", @"command", @"text.bubble", @"arrow.left.circle.fill", @"arrow.right.circle.fill", @"arrow.left.to.line", @"arrow.right.to.line", @"text.insert", @"text.append", @"decrease.quotelevel", @"increase.quotelevel", @"delete.left", @"delete.right", @"globe", @"doc.on.clipboard", @"circle.grid.3x3"];
     
     NSMutableArray *extrasOptionsDict = [[NSMutableArray alloc] init];
     
