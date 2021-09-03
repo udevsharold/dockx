@@ -190,7 +190,7 @@
 "EXTRAS_DELETE_FORWARD_BEHAVIOUR" = "Delete Forward Behaviour";
 "EXTRAS_GLOBE_BEHAVIOUR" = "Globe Behaviour";
 "EXTRAS_PASTE_BEHAVIOUR" = "Paste Behaviour";
-"EXTRAS_SPONGEBOB_BEHAVIOUR" = "Spongebob Text Behaviour";
+"EXTRAS_SPONGEBOB_BEHAVIOUR" = "sPonGeBob teXt Behaviour";
 
 //Title
 "ENABLED_SHORTCUTS" = "Enabled Shorcuts";
@@ -245,6 +245,7 @@ Globe - activate dictation
 sPonGeBob teXt - select all and sPonGeBob";
 
 "FOOTER_TEXT_FOR_DEFAULT_LONG_PRESS_GESTURES_TRANSLOMATIC" = "Translomatic - select paragraph and translate";
+"FOOTER_TEXT_FOR_DEFAULT_LONG_PRESS_GESTURES_TRANZLO" = "Tranzlo - select paragraph and translate";
 
 //=====================CUSTOM ACTIONS PAGE=====================
 "FIRST_ACTION" = "First Action";

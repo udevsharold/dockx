@@ -1,4 +1,4 @@
-#include "common.h"
+#import "common.h"
 #import "UIImage+Resize.h"
 
 @implementation UIImage (Resize)

@@ -9,7 +9,7 @@
 		<key>cell</key>
 		<string>PSLinkCell</string>
 		<key>detail</key>
-		<string>DockXRootListController</string>
+		<string>DXPRootListController</string>
 		<key>icon</key>
 		<string>DockX.png</string>
 		<key>isController</key>

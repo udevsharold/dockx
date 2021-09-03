@@ -252,7 +252,13 @@
 
 //=====================Manage Shortcuts=====================
 //Extras
-"EXTRAS_SPONGEBOB_BEHAVIOUR" = "Spongebob Text Behaviour";
+"EXTRAS_SPONGEBOB_BEHAVIOUR" = "sPonGeBob teXt Behaviour";
+
+//Footer
+"FOOTER_TEXT_FOR_DEFAULT_LONG_PRESS_GESTURES_TRANZLO" = "Tranzlo - select paragraph and translate";
+
+//=====================Toast=====================
+"TOAST_TRANZLO" = "Tranzlo";
 
 //=====================SPONGEBOB BEHAVIOR=====================
 "SPONGEBOB_ENTROPY" = "Randomness of Spongebob Text";

@@ -1,18 +1,5 @@
-#import <RocketBootstrap/rocketbootstrap.h>
-#include "DockXCollectionView.h"
-#include "TextOperation.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void showCopypastaWithNotification() __attribute__((weak));
-void flipLoupeEnableSwitch(BOOL enable) __attribute__((weak));
-BOOL loupeSwitchState() __attribute__((weak));
-
-#ifdef __cplusplus
-}
-#endif
+#import "DXCollectionView.h"
+#import "TextOperation.h"
 
 @interface UIKeyboardImpl : UIView
 + (UIKeyboardImpl*)activeInstance;
@@ -77,7 +64,7 @@ BOOL loupeSwitchState() __attribute__((weak));
 @property (nonatomic,retain) UIKeyboardDockItem * centerDockItem;
 //@property (retain, nonatomic) UIKeyboardDockItemButton *leftDockButton;
 //@property (retain, nonatomic) UIKeyboardDockItemButton *rightDockButton;
-@property (nonatomic, retain) DockXCollectionView *dockx;
+@property (nonatomic, retain) DXCollectionView *dockx;
 @property (retain, nonatomic) BarmojiCollectionView *barmoji;
 
 -(void)shouldUpdateLayoutWithDelay:(float)delay;

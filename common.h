@@ -1,8 +1,8 @@
-#include <Foundation/Foundation.h>
-#include <UIKit/UIKit.h>
-#include <HBLog.h>
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <HBLog.h>
 
-#import "PrefsManager.h"
+#import "DXPrefsManager.h"
 
 #define bundlePath @"/Library/PreferenceBundles/DockXPrefs.bundle"
 //#define dockxBundlePath @"/Library/Application Support/DockX.bundle"
@@ -116,6 +116,8 @@
 #define cellsRadiusDefault 5
 
 #define secondActionDelay 0.05
+
+#define DockXCachePath @"/private/var/mobile/Library/Caches/com.udevs.dockx"
 
 typedef NS_ENUM(NSInteger, DXPhonemesType){
     DXPhonemesTypeVowel,

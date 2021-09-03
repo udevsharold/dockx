@@ -1,7 +1,7 @@
 export ARCHS = arm64 arm64e
 
-export DEBUG=1
-export FINALPACKAGE=0
+export DEBUG = 0
+export FINALPACKAGE = 1
 
 export PREFIX = $(THEOS)/toolchain/Xcode11.xctoolchain/usr/bin/
 
@@ -11,7 +11,7 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = ADockX
 
-ADockX_FILES = $(wildcard *.x) $(wildcard *.m) $(wildcard *.xm)
+ADockX_FILES = $(wildcard *.x) $(wildcard *.m) $(wildcard *.mm) $(wildcard *.xm)
 ADockX_CFLAGS = -fobjc-arc
 ADockX_LIBRARIES = rocketbootstrap sparkcolourpicker
 ADockX_FRAMEWORKS = UIKit CoreGraphics CoreImage QuartzCore

@@ -160,7 +160,7 @@
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>detail</key>
-			<string>DockXItems</string>
+			<string>DXPManageShortcutsController</string>
 			<key>label</key>
 			<string>MANAGE_SHORTCUTS</string>
 		</dict>
@@ -714,7 +714,7 @@
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>detail</key>
-			<string>AdvancedController</string>
+			<string>DXPAdvancedController</string>
 			<key>label</key>
 			<string>ADVANCED_SETTINGS</string>
 		</dict>

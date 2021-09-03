@@ -4,7 +4,7 @@ include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = DockXPrefs
 
-DockXPrefs_FILES = $(wildcard *.m) $(wildcard *.mm) ../PrefsManager.x ../ShortcutsGenerator.x ../DockXHelper.x
+DockXPrefs_FILES = $(wildcard *.m) $(wildcard *.mm) ../DXPrefsManager.m ../DXShortcutsGenerator.m ../DXHelper.m
 DockXPrefs_INSTALL_PATH = /Library/PreferenceBundles
 DockXPrefs_FRAMEWORKS = UIKit CoreGraphics
 DockXPrefs_PRIVATE_FRAMEWORKS = Preferences AppSupport
