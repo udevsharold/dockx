@@ -13,7 +13,6 @@ static NSBundle *tweakBundle;
     if (!_specifiers) {
         _specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
         
-        
         NSArray *dynamicCell = @[@"pyslider", @"timerslider",@"shortcutstintpicker",@"toasttintpicker",@"toastbackgroundtintpicker", @"granularityslider", @"displaytypeselection", @"gesturetypeselection", @"gesturebuttonselection",@"shortcutstintselection", @"toasttintselection", @"toastbackgroundtintselection", @"shortcutsbackgroundtintpicker", @"shortcutsbackgroundtintselection"];
         self.dynamicSpecifiers = (!self.dynamicSpecifiers) ? [[NSMutableDictionary alloc] init] : self.dynamicSpecifiers;
         for(PSSpecifier *specifier in _specifiers) {
@@ -72,12 +71,8 @@ static NSBundle *tweakBundle;
     
     
     UIView *headerView = [[UIView alloc] initWithFrame:frame];
-    headerView.backgroundColor = [UIColor colorWithRed: 0.64 green: 0.69 blue: 0.74 alpha: 1.00];
-    
-    
-    
-    
-    
+    headerView.backgroundColor = [UIColor colorWithRed: 0.20 green: 0.20 blue: 0.20 alpha: 1.00];
+
     //UIImage *headerImage = [UIImage systemImageNamed:@"doc.on.doc"];
     
     
@@ -94,7 +89,7 @@ static NSBundle *tweakBundle;
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:labelFrame];
     [headerLabel setText:@"DockX"];
     [headerLabel setFont:font];
-    [headerLabel setTextColor:[UIColor blackColor]];
+    [headerLabel setTextColor:[UIColor colorWithRed: 0.60 green: 0.60 blue: 0.60 alpha: 1.00]];
     headerLabel.textAlignment = NSTextAlignmentCenter;
     [headerLabel setContentMode:UIViewContentModeScaleAspectFit];
     [headerLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
@@ -115,26 +110,6 @@ static NSBundle *tweakBundle;
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"pyslider"] animated:NO];
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"timerslider"] animated:NO];
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"displaytypeselection"] animated:NO];
-    }else if(![preferences[@"colorBOOL"] boolValue]){
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintpicker"] setProperty:@NO forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toasttintpicker"] setProperty:@NO forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintpicker"] setProperty:@NO forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintpicker"] setProperty:@NO forKey:@"enabled"];
-
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintselection"] setProperty:@NO forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toasttintselection"] setProperty:@NO forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintselection"] setProperty:@NO forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintselection"] setProperty:@NO forKey:@"enabled"];
-        
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintpicker"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toasttintpicker"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintpicker"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintpicker"] animated:NO];
-
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintselection"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toasttintselection"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintselection"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintselection"] animated:NO];
     }else if(![preferences[@"enabledSpaceBarScrollingBOOL"] boolValue]){
         [(PSSpecifier *)self.dynamicSpecifiers[@"granularityslider"] setProperty:@NO forKey:@"enabled"];
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"granularityslider"] animated:NO];
@@ -158,27 +133,6 @@ static NSBundle *tweakBundle;
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"pyslider"] animated:NO];
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"timerslider"] animated:NO];
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"displaytypeselection"] animated:NO];
-    }else if([key isEqualToString:@"colorBOOL"]){
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintpicker"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toasttintpicker"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintpicker"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintpicker"] setProperty:value forKey:@"enabled"];
-        
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintselection"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toasttintselection"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintselection"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintselection"] setProperty:value forKey:@"enabled"];
-
-        //[self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintpicker"] animated:NO];
-        //[self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toasttintpicker"] animated:NO];
-        //[self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintpicker"] animated:NO];
-        //[self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintpicker"] animated:NO];
-
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintselection"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toasttintselection"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintselection"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintselection"] animated:NO];
-
     }else if([key isEqualToString:@"enabledSpaceBarScrollingBOOL"]){
         [(PSSpecifier *)self.dynamicSpecifiers[@"granularityslider"] setProperty:value forKey:@"enabled"];
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"granularityslider"] animated:NO];
@@ -225,27 +179,6 @@ static NSBundle *tweakBundle;
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"pyslider"] animated:NO];
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"timerslider"] animated:NO];
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"displaytypeselection"] animated:NO];
-    }else if([key isEqualToString:@"colorBOOL"]){
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintpicker"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toasttintpicker"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintpicker"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintpicker"] setProperty:value forKey:@"enabled"];
-
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintselection"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toasttintselection"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintselection"] setProperty:value forKey:@"enabled"];
-        [(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintselection"] setProperty:value forKey:@"enabled"];
-
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintpicker"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toasttintpicker"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintpicker"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintpicker"] animated:NO];
-
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutstintselection"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toasttintselection"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"toastbackgroundtintselection"] animated:NO];
-        [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"shortcutsbackgroundtintselection"] animated:NO];
-
     }else if([key isEqualToString:@"enabledSpaceBarScrollingBOOL"]){
         [(PSSpecifier *)self.dynamicSpecifiers[@"granularityslider"] setProperty:value forKey:@"enabled"];
         [self reloadSpecifier:(PSSpecifier *)self.dynamicSpecifiers[@"granularityslider"] animated:NO];
