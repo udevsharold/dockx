@@ -1143,24 +1143,23 @@ static void sbDidLaunch(){
 %ctor {
     
     @autoreleasepool {
-        // check if process is springboard or an application
-        // this prevents our tweak from running in non-application (with UI)
-        // processes and also prevents bad behaving tweaks to invoke our tweak
         
         NSArray *args = [[NSClassFromString(@"NSProcessInfo") processInfo] arguments];
         
-        if (args.count != 0) {
+        if (args.count != 0){
             NSString *executablePath = args[0];
             HBLogDebug(@"executablePath: %@", executablePath);
-            if (executablePath) {
+            if (executablePath){
                 NSString *processName = [executablePath lastPathComponent];
                 //HBLogDebug(@"INIT: %@", processName);
                 isSpringBoard = [processName isEqualToString:@"SpringBoard"];
                 isApplication = [executablePath rangeOfString:@"/Application"].location != NSNotFound;
-                isApplication = [processName isEqualToString:@"MarkupPhotoExtension"] ?: isApplication;
+				isApplication = isApplication ?: ([executablePath rangeOfString:@".appex/"].location != NSNotFound ?: isApplication);
+                //isApplication = [processName isEqualToString:@"MarkupPhotoExtension"] ?: isApplication;
                 isSafari = [processName isEqualToString:@"MobileSafari"];
-                
-                if (isSpringBoard || isApplication) {
+				HBLogDebug(@"isSpringBoard: %d ** isApplication: %d ** isSafari: %d", isSpringBoard, isApplication, isSafari);
+				
+                if (isSpringBoard || isApplication){
                     tweakBundle = [NSBundle bundleWithPath:bundlePath];
                     [tweakBundle load];
                     firstInit = YES;

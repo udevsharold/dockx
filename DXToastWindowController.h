@@ -20,7 +20,7 @@
 @property (strong, strong) UIView *content;
 + (instancetype)sharedInstance;
 - (NSDictionary *)showToastRequest:(NSString *)name withUserInfo:(NSDictionary *)userInfo;
--(void)presentToastWindowWithMessage:(NSString *)kMessage Width:(int)kWidth Height:(int)kHeight X:(int)kLocX Y:(int)kLocY Alpha:(float)kAlpha Radius:(float)kRadius backgroundColor:(UIColor *)kColor textColor:(UIColor *)kColorLabel numberOfLines:(int)kLines imagePath:(NSString *)kImagePath imageTint:(UIColor *)kImageTint displayType:(int)kDisplayType;
+-(void)presentToastWindowWithMessage:(NSString *)kMessage width:(int)kWidth height:(int)kHeight x:(int)kLocX y:(int)kLocY alpha:(float)kAlpha radius:(float)kRadius backgroundColor:(UIColor *)kColor textColor:(UIColor *)kColorLabel numberOfLines:(int)kLines imagePath:(NSString *)kImagePath imageTint:(UIColor *)kImageTint displayType:(int)kDisplayType;
 -(void)dismissToastWithDelay;
 - (NSDictionary *)orientationChanged;
 -(NSDictionary *)updateToastXY;
